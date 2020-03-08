@@ -4,9 +4,8 @@ namespace MyForumApp.Data.Models
     using System;
     using System.Collections.Generic;
 
-    using MyForumApp.Data.Common.Models;
-
     using Microsoft.AspNetCore.Identity;
+    using MyForumApp.Data.Common.Models;
 
     public class ApplicationUser : IdentityUser, IAuditInfo, IDeletableEntity
     {
@@ -16,6 +15,7 @@ namespace MyForumApp.Data.Models
             this.Roles = new HashSet<IdentityUserRole<string>>();
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
+            this.Posts = new HashSet<Post>();
         }
 
         // Audit info
@@ -33,5 +33,7 @@ namespace MyForumApp.Data.Models
         public virtual ICollection<IdentityUserClaim<string>> Claims { get; set; }
 
         public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
+
+        public virtual ICollection<Post> Posts { get; set; }
     }
 }

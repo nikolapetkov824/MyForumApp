@@ -3,9 +3,8 @@ namespace MyForumApp.Data.Models
 {
     using System;
 
-    using MyForumApp.Data.Common.Models;
-
     using Microsoft.AspNetCore.Identity;
+    using MyForumApp.Data.Common.Models;
 
     public class ApplicationRole : IdentityRole, IAuditInfo, IDeletableEntity
     {

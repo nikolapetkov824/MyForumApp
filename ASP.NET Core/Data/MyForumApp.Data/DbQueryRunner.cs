@@ -3,9 +3,8 @@
     using System;
     using System.Threading.Tasks;
 
-    using MyForumApp.Data.Common;
-
     using Microsoft.EntityFrameworkCore;
+    using MyForumApp.Data.Common;
 
     public class DbQueryRunner : IDbQueryRunner
     {

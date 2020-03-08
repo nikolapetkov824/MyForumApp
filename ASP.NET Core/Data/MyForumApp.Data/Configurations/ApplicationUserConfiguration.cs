@@ -1,8 +1,8 @@
 ﻿namespace MyForumApp.Data.Configurations
 {
-    using MyForumApp.Data.Models;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
+    using MyForumApp.Data.Models;
 
     public class ApplicationUserConfiguration : IEntityTypeConfiguration<ApplicationUser>
     {

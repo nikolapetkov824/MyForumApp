@@ -2,9 +2,8 @@
 {
     using System.Diagnostics;
 
-    using MyForumApp.Web.ViewModels;
-
     using Microsoft.AspNetCore.Mvc;
+    using MyForumApp.Web.ViewModels;
 
     public class HomeController : BaseController
     {
