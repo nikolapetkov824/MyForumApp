@@ -11,12 +11,12 @@
 
         public string Title { get; set; }
 
-        public string Content { get; set; }
+        public string Description { get; set; }
 
         public string ShortContent =>
-            this.Content?.Length > 100
-                ? this.Content?.Substring(0, 100) + "..."
-                : this.Content;
+            this.Description?.Length > 100
+                ? this.Description?.Substring(0, 100) + "..."
+                : this.Description;
 
         public string UserUserName { get; set; }
 
