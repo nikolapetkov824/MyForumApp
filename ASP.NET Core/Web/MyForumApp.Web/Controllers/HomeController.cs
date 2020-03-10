@@ -3,18 +3,27 @@
     using System.Diagnostics;
 
     using Microsoft.AspNetCore.Mvc;
+    using MyForumApp.Services.Data;
     using MyForumApp.Web.ViewModels;
+    using MyForumApp.Web.ViewModels.Home;
 
     public class HomeController : BaseController
     {
-        public IActionResult Index()
+        private readonly ICategoriesService categoriesService;
+
+        public HomeController(ICategoriesService categoriesService)
         {
-            return this.View();
+            this.categoriesService = categoriesService;
         }
 
-        public IActionResult Privacy()
+        public IActionResult Index()
         {
-            return this.View();
+            var viewModel = new IndexViewModel
+            {
+                Categories =
+                    this.categoriesService.GetAll<IndexCategoryViewModel>(),
+            };
+            return this.View(viewModel);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
