@@ -19,5 +19,10 @@
                 this.categoriesService.GetByName<CategoryViewModel>(name);
             return this.View(viewModel);
         }
+
+        //public IActionResult CreatePost()
+        //{
+        //    return this.View();
+        //}
     }
 }

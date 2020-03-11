@@ -1,0 +1,17 @@
+﻿@*@model MyForumApp.Web.ViewModels.Posts.PostViewModel
+@{
+    this.ViewData["Title"] = Model.Title;
+}*@
+
+<div class="form-group">
+    <div class="text-white label-holder d-flex justify-content-center">
+        <label for="name" class="h4 mb-2">Title</label>
+    </div>
+    <input type="text" class="form-control" id="title" name="title" />
+</div>
+<div class="form-group">
+    <div class="text-white label-holder d-flex justify-content-center">
+        <label for="description" class="h4 mb-2">Description</label>
+    </div>
+    <input type="text" class="form-control" id="description" name="description" />
+</div>
