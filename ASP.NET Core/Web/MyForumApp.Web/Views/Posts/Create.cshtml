@@ -1,7 +1,7 @@
-﻿@*@model MyForumApp.Web.ViewModels.Posts.PostViewModel
+﻿@model MyForumApp.Web.ViewModels.Posts.CreatePostViewModel
 @{
-    this.ViewData["Title"] = Model.Title;
-}*@
+    this.ViewData["Title"] = "CreatePost";
+}
 
 <div class="form-group">
     <div class="text-black-50 label-holder d-flex justify-content-center">
@@ -16,4 +16,6 @@
     <input type="text" class="form-control" id="description" name="description" />
 </div>
 
-<a asp-controller="Posts" asp-action="CreatePost"><button type="submit" class="btn btn-primary">Add</button></a>
+<form asp-controller="Posts" asp-action="CreatePost" method="post">
+    <button type="submit" class="btn btn-primary">Add</button>
+</form>
