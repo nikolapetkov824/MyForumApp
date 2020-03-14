@@ -9,12 +9,10 @@
     public class PostsService : IPostsService
     {
         private readonly IDeletableEntityRepository<Post> postsRepository;
-        private readonly ApplicationUser user;
 
-        public PostsService(IDeletableEntityRepository<Post> postsRepository, ApplicationUser user)
+        public PostsService(IDeletableEntityRepository<Post> postsRepository)
         {
             this.postsRepository = postsRepository;
-            this.user = user;
         }
 
         public async Task<int> AddPost(ICreatePostViewModel model, int categoryId)

@@ -15,14 +15,11 @@
     public class PostsController : Controller
     {
         private readonly IPostsService postsService;
-        private readonly ApplicationUser user;
 
         public PostsController(
-            IPostsService postsService,
-            ApplicationUser user)
+            IPostsService postsService)
         {
             this.postsService = postsService;
-            this.user = user;
         }
 
         public IActionResult Create(string id)

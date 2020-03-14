@@ -26,13 +26,13 @@
 
 <div id="shoutbox" class="menu-bg-forum text-center">
     <h1 class="m-0"><a id="main-heading-text" href="#">Create Topic</a></h1>
-    <h2 class="m-0"><a id="main-heading-text" href="#">Forum: @Model.CategoryName</a></h2>
+    <h2 class="m-0"><a id="main-heading-text" href="#">Category: NAN</a></h2>
 </div>
 <div class="post-form mt-5">
     <div class="container two-thirds-width mx-5-auto">
         <form class="my-form" asp-controller="Posts" asp-action="Create">
             <div asp-validation-summary="All" class="text-danger"></div>
-            <input type="hidden" hidden="hidden" name="forumId" value="@Model.CategoryId" />
+            <input type="hidden" hidden="hidden" name="categoryId" value="NAN" />
             <div class="block">
                 <label asp-for="Title" class="text-forum">Title</label>
                 <input asp-for="Title" class="full-width" type="text" placeholder="Enter post title...">
