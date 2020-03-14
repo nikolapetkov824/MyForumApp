@@ -1,6 +1,7 @@
 ﻿namespace MyForumApp.Web.Controllers
 {
     using System.Linq;
+    using System.Net;
     using System.Security.Claims;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Identity;
@@ -14,41 +15,47 @@
     public class PostsController : Controller
     {
         private readonly IPostsService postsService;
-        private readonly IDeletableEntityRepository<Post> postsRepository;
-        private readonly IDeletableEntityRepository<Category> categoriesRepository;
-        private readonly UserManager<ApplicationUser> user;
-        private readonly ApplicationDbContext dbContext;
+        private readonly ApplicationUser user;
 
         public PostsController(
             IPostsService postsService,
-            IDeletableEntityRepository<Post> postsRepository,
-            IDeletableEntityRepository<Category> categoriesRepository,
-            UserManager<ApplicationUser> user,
-            ApplicationDbContext dbContext)
+            ApplicationUser user)
         {
             this.postsService = postsService;
-            this.postsRepository = postsRepository;
-            this.categoriesRepository = categoriesRepository;
             this.user = user;
-            this.dbContext = dbContext;
         }
 
-        public IActionResult Create()
+        public IActionResult Create(string id)
         {
-            if (!this.ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
-                return this.Redirect("/");
+                return this.View();
             }
+            else
+            {
+                var result = this.View("Error", this.ModelState);
+                result.StatusCode = (int)HttpStatusCode.BadRequest;
 
-            return this.View();
+                return result;
+            }
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreatePost(CreatePostViewModel inputModel)
+        public IActionResult Create(CreatePostViewModel model)
         {
-            this.postsService.CreatePost<Post>(inputModel.Title, inputModel.Description);
+            if (this.ModelState.IsValid)
+            {
+                this.postsService.AddPost(model, model.CategoryId).GetAwaiter().GetResult();
 
-            return this.Redirect("/");
+                return this.Redirect($"/Forum/Posts?Id={model.CategoryId}");
+            }
+            else
+            {
+                var result = this.View("Error", this.ModelState);
+                result.StatusCode = (int)HttpStatusCode.BadRequest;
+
+                return result;
+            }
         }
     }
 }

@@ -1,7 +1,12 @@
 ﻿namespace MyForumApp.Services.Data
 {
+    using System.Threading.Tasks;
+
+    using MyForumApp.Data.Models;
+    using MyForumApp.Web.ViewModels.Posts;
+
     public interface IPostsService
     {
-        void CreatePost<T>(string title, string description);
+        Task<int> AddPost(ICreatePostViewModel model, int categoryId);
     }
 }

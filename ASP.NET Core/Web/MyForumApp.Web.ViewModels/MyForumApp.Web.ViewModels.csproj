@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Data\MyForumApp.Data.Models\MyForumApp.Data.Models.csproj" />
+    <ProjectReference Include="..\..\MyForumApp.Web.ViewModels.Common\MyForumApp.Web.ViewModels.Common.csproj" />
     <ProjectReference Include="..\..\Services\MyForumApp.Services.Mapping\MyForumApp.Services.Mapping.csproj" />
   </ItemGroup>
 

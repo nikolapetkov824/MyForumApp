@@ -1,40 +1,34 @@
 ﻿namespace MyForumApp.Services.Data
 {
-    using MyForumApp.Data;
+    using System;
+    using System.Threading.Tasks;
     using MyForumApp.Data.Common.Repositories;
     using MyForumApp.Data.Models;
+    using MyForumApp.Web.ViewModels.Posts;
 
     public class PostsService : IPostsService
     {
         private readonly IDeletableEntityRepository<Post> postsRepository;
-        //private readonly ApplicationUser user;
-        //private readonly Category category;
+        private readonly ApplicationUser user;
 
-        public PostsService(
-            IDeletableEntityRepository<Post> postsRepository)
-            //ApplicationUser user,
-           // Category category)
+        public PostsService(IDeletableEntityRepository<Post> postsRepository, ApplicationUser user)
         {
             this.postsRepository = postsRepository;
-            //this.user = user;
-            //this.category = category;
+            this.user = user;
         }
 
-        public void CreatePost<T>(string title, string description)
+        public async Task<int> AddPost(ICreatePostViewModel model, int categoryId)
         {
-            //var userId = this.user.Id;
-            //var categoryId = this.category.Id;
-
             var post = new Post
             {
-                Title = title,
-                Description = description,
-                //UserId = userId,
-                //CategoryId = categoryId,
+                CreatedOn = DateTime.UtcNow,
+                Title = model.Title,
+                Description = model.Description,
+                CategoryId = categoryId,
             };
 
-            this.postsRepository.AddAsync(post); /*CreatePost<CreatePostViewModel>(title, description);*/
-            this.postsRepository.SaveChangesAsync();
+            await this.postsRepository.AddAsync(post);
+            return await this.postsRepository.SaveChangesAsync();
         }
     }
 }
