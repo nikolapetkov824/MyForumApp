@@ -25,8 +25,8 @@
 @model CreatePostViewModel;
 
 <div id="shoutbox" class="menu-bg-forum text-center">
-    <h1 class="m-0"><a id="main-heading-text" href="#">Create Topic</a></h1>
-    <h2 class="m-0"><a id="main-heading-text" href="#">Category: NAN</a></h2>
+    <h1 class="m-0"><a id="main-heading-text" href="#">Create Post</a></h1>
+    <h2 class="m-0"><a id="main-heading-text" href="#">Category: CategoryName</a></h2>
 </div>
 <div class="post-form mt-5">
     <div class="container two-thirds-width mx-5-auto">
@@ -41,12 +41,12 @@
                 </div>
             </div>
             <hr class=" full-width">
-            <div class="text-center">
-                <div class="block">
+            <div class="">
+                <div class="">
                     <div>
                         <label asp-for="Description" class="text-forum bold">Description</label>
                     </div>
-                    <button title="italic" type="button" value="[i][/i]" class="text">italic</button>
+                    @*<button title="italic" type="button" value="[i][/i]" class="text">italic</button>
                     <button title="bold text" type="button" value="[b][/b]" class="text">bold</button>
                     <button title="center text" type="button" value="[center][/center]" class="text">center</button>
                     <button title="heading 1" type="button" value="[h1][/h1]" class="text">heading 1</button>
@@ -54,48 +54,17 @@
                     <button title="heading 3" type="button" value="[h3][/h3]" class="text">heading 3</button>
                     <button title="ordered list" type="button" value="[ol][li][/li][/ol]" class="text"><i class="fas fa-list-ol"></i></button>
                     <button title="unordered list" type="button" value="[ul][li][/li][/ul]" class="text"><i class="fas fa-list-ul"></i></button>
-                    <button title="list item" type="button" value="[li][/li]" class="text">list item</button>
-                    <textarea asp-for="Description" class="full-width post-textarea" rows="12" cols="10">Enter post Description...</textarea>
+                    <button title="list item" type="button" value="[li][/li]" class="text">list item</button>*@
+                    <textarea asp-for="Description" class="full-width" cols="100" rows="10" placeholder="Enter post Description..."></textarea>
                     <div>
                         <span asp-validation-for="Description" class="text-danger"></span>
                     </div>
                 </div>
-                <button type="button" class="emote">😀</button>
-                <button type="button" class="emote">😃</button>
-                <button type="button" class="emote">😄</button>
-                <button type="button" class="emote">😆</button>
-                <button type="button" class="emote">🤣</button>
-                <button type="button" class="emote">🙂</button>
-                <button type="button" class="emote">😉</button>
-                <button type="button" class="emote">😊</button>
-                <button type="button" class="emote">😇</button>
-                <button type="button" class="emote">😍</button>
-                <button type="button" class="emote">😘</button>
-                <button type="button" class="emote">😋</button>
-                <button type="button" class="emote">😛</button>
-                <button type="button" class="emote">🤑</button>
-                <button type="button" class="emote">🤔</button>
-                <button type="button" class="emote">😐</button>
-                <button type="button" class="emote">😶</button>
-                <button type="button" class="emote">😬</button>
-                <button type="button" class="emote">😴</button>
-                <button type="button" class="emote">🤒</button>
-                <button type="button" class="emote">😎</button>
-                <button type="button" class="emote">🙁</button>
-                <button type="button" class="emote">😮</button>
-                <button type="button" class="emote">😲</button>
-                <button type="button" class="emote">😥</button>
-                <button type="button" class="emote">😭	</button>
-                <button type="button" class="emote">😓</button>
-                <button type="button" class="emote">😡</button>
-                <button type="button" class="emote">😈</button>
-                <button type="button" class="emote">💩</button>
-                <button type="button" class="emote">❤</button>
             </div>
             <hr class="full-width">
             <div class="center-button">
-                <input onclick="window.history.back()" class="mt-25 submit-button menu-bg-forum text-white" type="button" value="Cancel">
-                <input class="mt-25 submit-button menu-bg-forum text-white" type="submit" value="Post">
+                <input onclick="window.history.back()" class="mt-25 submit-button menu-bg-forum text-black-50" type="button" value="Cancel">
+                <button asp-controller="Posts" asp-action="Create" type="button" value="Post"></button>
             </div>
         </form>
     </div>

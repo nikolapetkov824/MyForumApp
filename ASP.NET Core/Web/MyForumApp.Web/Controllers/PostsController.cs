@@ -30,10 +30,7 @@
             }
             else
             {
-                var result = this.View("Error", this.ModelState);
-                result.StatusCode = (int)HttpStatusCode.BadRequest;
-
-                return result;
+                return this.View("Error");
             }
         }
 
@@ -44,14 +41,11 @@
             {
                 this.postsService.AddPost(model, model.CategoryId).GetAwaiter().GetResult();
 
-                return this.Redirect($"/Forum/Posts?Id={model.CategoryId}");
+                return this.Redirect($"/f/Categories?Id={model.CategoryId}");
             }
             else
             {
-                var result = this.View("Error", this.ModelState);
-                result.StatusCode = (int)HttpStatusCode.BadRequest;
-
-                return result;
+                return this.View("Error");
             }
         }
     }
