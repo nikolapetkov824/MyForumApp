@@ -13,16 +13,12 @@
             this.categoriesService = categoriesService;
         }
 
-        public IActionResult SortByName(string name)
+        public IActionResult GetByName(string name)
         {
             var viewModel =
                 this.categoriesService.GetByName<CategoryViewModel>(name);
+
             return this.View(viewModel);
         }
-
-        //public IActionResult CreatePost()
-        //{
-        //    return this.View();
-        //}
     }
 }

@@ -7,6 +7,10 @@
 
     public interface IPostsService
     {
-        Task<int> AddPost(ICreatePostViewModel model, int categoryId);
+        Task<int> CreateAsync(
+            string title,
+            string description,
+            int categoryId,
+            string userId);
     }
 }

@@ -1,9 +1,11 @@
 ﻿namespace MyForumApp.Web.Controllers
 {
+    using System;
     using System.Linq;
     using System.Net;
     using System.Security.Claims;
     using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using MyForumApp.Data;
@@ -15,38 +17,50 @@
     public class PostsController : Controller
     {
         private readonly IPostsService postsService;
+        private readonly UserManager<ApplicationUser> userManager;
 
         public PostsController(
-            IPostsService postsService)
+            IPostsService postsService,
+            UserManager<ApplicationUser> userManager)
         {
             this.postsService = postsService;
+            this.userManager = userManager;
         }
 
-        public IActionResult Create(string id)
+        public IActionResult ById(int id)
         {
-            if (this.ModelState.IsValid)
-            {
-                return this.View();
-            }
-            else
+            return this.View();
+        }
+
+        [Authorize]
+        public IActionResult CreatePost()
+        {
+            if (!this.ModelState.IsValid)
             {
                 return this.View("Error");
             }
+
+            return this.View();
         }
 
         [HttpPost]
-        public IActionResult Create(CreatePostViewModel model)
+        [Authorize]
+        public async Task<IActionResult> CreatePost(CreatePostViewModel model)
         {
-            if (this.ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
-                this.postsService.AddPost(model, model.CategoryId).GetAwaiter().GetResult();
+                return this.View(model);
+            }
 
-                return this.Redirect($"/f/Categories?Id={model.CategoryId}");
-            }
-            else
-            {
-                return this.View("Error");
-            }
+            var user = await this.userManager.GetUserAsync(this.User);
+
+            var postId = await this.postsService.CreateAsync(
+                model.Title,
+                model.Description,
+                model.CategoryId,
+                user.Id);
+
+            return this.RedirectToAction(nameof(this.ById), new { id = postId });
         }
     }
 }

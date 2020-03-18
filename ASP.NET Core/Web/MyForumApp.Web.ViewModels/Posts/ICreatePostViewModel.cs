@@ -10,7 +10,5 @@
         string Description { get; set; }
 
         int CategoryId { get; set; }
-
-        string CategoryName { get; set; }
     }
 }

@@ -15,6 +15,6 @@
 
         public int PostsCount { get; set; }
 
-        public string Url => $"/f/{this.Name.Replace(' ', '-')}";
+        public string Url => $"/{this.Name.Replace(' ', '-')}";
     }
 }

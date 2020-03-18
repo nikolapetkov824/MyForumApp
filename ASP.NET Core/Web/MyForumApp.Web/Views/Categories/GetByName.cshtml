@@ -10,9 +10,9 @@
 
 @*<button type="button" class="btn btn-primary" name="createPost">Add a new post in this category</button>*@
 @*<button type="button" value="Go" class="btn btn-default" href="/Posts/CreatePost">Add a new post in this category</button>*@
-<a asp-controller="Posts" asp-action="Create" method="get">
+@*<a asp-controller="Posts" asp-action="Create" method="get">
     <button type="button" class="btn btn-primary">Add a new post in this category</button>
-</a>
+</a>*@
 
 @foreach (var post in Model.Posts)
 {

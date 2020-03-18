@@ -15,18 +15,25 @@
             this.postsRepository = postsRepository;
         }
 
-        public async Task<int> AddPost(ICreatePostViewModel model, int categoryId)
+        public async Task<int> CreateAsync(
+            string title,
+            string description,
+            int categoryId,
+            string userId)
         {
             var post = new Post
             {
                 CreatedOn = DateTime.UtcNow,
-                Title = model.Title,
-                Description = model.Description,
+                Title = title,
+                Description = description,
                 CategoryId = categoryId,
+                UserId = userId,
             };
 
             await this.postsRepository.AddAsync(post);
-            return await this.postsRepository.SaveChangesAsync();
+            await this.postsRepository.SaveChangesAsync();
+
+            return post.Id;
         }
     }
 }
