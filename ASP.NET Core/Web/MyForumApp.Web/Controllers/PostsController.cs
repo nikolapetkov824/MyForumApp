@@ -17,19 +17,27 @@
     public class PostsController : Controller
     {
         private readonly IPostsService postsService;
+        private readonly ICategoriesService categoriesService;
         private readonly UserManager<ApplicationUser> userManager;
 
         public PostsController(
             IPostsService postsService,
+            ICategoriesService categoriesService,
             UserManager<ApplicationUser> userManager)
         {
             this.postsService = postsService;
+            this.categoriesService = categoriesService;
             this.userManager = userManager;
         }
 
         public IActionResult ById(int id)
         {
-            return this.View();
+            var postViewModel = this.postsService.GetById<PostViewModel>(id);
+            if (postViewModel == null)
+            {
+                return this.NotFound();
+            }
+            return this.View(postViewModel);
         }
 
         [Authorize]
@@ -40,7 +48,13 @@
                 return this.View("Error");
             }
 
-            return this.View();
+            var categories = this.categoriesService.GetAll<CategoryDropDownViewModel>();
+            var viewModel = new CreatePostViewModel
+            {
+                Categories = categories,
+            };
+
+            return this.View(viewModel);
         }
 
         [HttpPost]

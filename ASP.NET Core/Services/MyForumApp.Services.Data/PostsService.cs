@@ -1,9 +1,11 @@
 ﻿namespace MyForumApp.Services.Data
 {
     using System;
+    using System.Linq;
     using System.Threading.Tasks;
     using MyForumApp.Data.Common.Repositories;
     using MyForumApp.Data.Models;
+    using MyForumApp.Services.Mapping;
     using MyForumApp.Web.ViewModels.Posts;
 
     public class PostsService : IPostsService
@@ -34,6 +36,14 @@
             await this.postsRepository.SaveChangesAsync();
 
             return post.Id;
+        }
+
+        public T GetById<T>(int id)
+        {
+            var post = this.postsRepository.All().Where(x => x.Id == id)
+                .To<T>().FirstOrDefault();
+
+            return post;
         }
     }
 }

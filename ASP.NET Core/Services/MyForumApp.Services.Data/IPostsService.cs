@@ -12,5 +12,7 @@
             string description,
             int categoryId,
             string userId);
+
+        T GetById<T>(int id);
     }
 }
