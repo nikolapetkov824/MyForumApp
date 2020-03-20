@@ -7,8 +7,10 @@
     using MyForumApp.Data.Models;
     using MyForumApp.Services.Mapping;
 
-    public class PostViewModel : IMapFrom<Post>, IHaveCustomMappings
+    public class PostViewModel : IMapFrom<Post>, IMapTo<Post>, IHaveCustomMappings
     {
+        public int Id { get; set; }
+
         public DateTime CreatedOn { get; set; }
 
         public string Title { get; set; }

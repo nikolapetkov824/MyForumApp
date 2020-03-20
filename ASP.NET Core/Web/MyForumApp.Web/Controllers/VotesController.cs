@@ -9,12 +9,16 @@
     using MyForumApp.Services.Data;
     using MyForumApp.Web.ViewModels.Votes;
 
-    public class VotesController : Controller
+    [ApiController]
+    [Route("api/[controller]")]
+    public class VotesController : ControllerBase
     {
         private readonly IVotesService votesService;
         private readonly UserManager<ApplicationUser> userManager;
 
-        public VotesController(IVotesService votesService, UserManager<ApplicationUser> userManager)
+        public VotesController(
+            IVotesService votesService,
+            UserManager<ApplicationUser> userManager)
         {
             this.votesService = votesService;
             this.userManager = userManager;
