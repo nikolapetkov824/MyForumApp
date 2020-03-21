@@ -1,15 +1,10 @@
 ﻿namespace MyForumApp.Web.Controllers
 {
-    using System;
-    using System.Linq;
-    using System.Net;
-    using System.Security.Claims;
     using System.Threading.Tasks;
+
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-    using MyForumApp.Data;
-    using MyForumApp.Data.Common.Repositories;
     using MyForumApp.Data.Models;
     using MyForumApp.Services.Data;
     using MyForumApp.Web.ViewModels.Posts;
@@ -37,6 +32,7 @@
             {
                 return this.NotFound();
             }
+
             return this.View(postViewModel);
         }
 

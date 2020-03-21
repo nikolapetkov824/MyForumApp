@@ -8,11 +8,13 @@
     @Model.Description
 </div>
 
-@*<button type="button" class="btn btn-primary" name="createPost">Add a new post in this category</button>*@
-@*<button type="button" value="Go" class="btn btn-default" href="/Posts/CreatePost">Add a new post in this category</button>*@
-@*<a asp-controller="Posts" asp-action="Create" method="get">
-    <button type="button" class="btn btn-primary">Add a new post in this category</button>
-</a>*@
+<hr />
+
+<div>
+    <a href="/Posts/CreatePost" type="button" class="btn btn-primary" />Add new post<a />
+</div>
+
+<hr />
 
 @foreach (var post in Model.Posts)
 {

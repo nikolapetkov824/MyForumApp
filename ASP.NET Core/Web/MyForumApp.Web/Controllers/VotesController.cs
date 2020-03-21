@@ -28,11 +28,11 @@
         [HttpPost]
         public async Task<ActionResult<VoteResponseModel>> Post(VoteInputModel voteInputModel)
         {
-            var user = await this.userManager.GetUserAsync(this.User);
+            var userId = this.userManager.GetUserId(this.User);
 
             await this.votesService.VoteAsync(
                 voteInputModel.PostId,
-                user.Id,
+                userId,
                 voteInputModel.IsUpVote);
 
             var votes = this.votesService.GetVotes(voteInputModel.PostId);
