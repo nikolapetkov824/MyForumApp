@@ -15,14 +15,12 @@
 
         public IActionResult GetById(int postId)
         {
-            //var commentsViewModel = this.commentsService.GetById<CommentViewModel>(postId);
-
             //return this.View(commentsViewModel);
 
             var viewModel = new CommentViewModel
             {
                 Comments =
-                    this.commentsService.GetAll<IndexCommentViewModel>(),
+                    this.commentsService.GetById<IndexCommentViewModel>(postId),
             };
             return this.View(viewModel);
         }

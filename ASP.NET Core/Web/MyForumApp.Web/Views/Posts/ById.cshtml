@@ -49,7 +49,8 @@
 
 <hr />
 <div>
-    <a asp-controller="Comments" asp-action="GetById" value="@Model.Id" type="button" class="btn btn-primary" />See the comments<a />
+    <form asp-controller="Comments" asp-action="GetById" asp-route="@Model.Id"  /><form />
+        <a href="/Comments/GetById" type="button" class="btn btn-primary" ></a>
 </div>
 
 @section Scripts {

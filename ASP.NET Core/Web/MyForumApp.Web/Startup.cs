@@ -111,7 +111,7 @@
                     {
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapControllerRoute("forumCategory", "/{name:minlength(3)}", new { controller = "Categories", action = "GetByName" });
-                        endpoints.MapControllerRoute("forumComments", "/{name:minlength(3)}", new { controller = "Comments", action = "GetById" });
+                        endpoints.MapControllerRoute("postId", "/{name:minlength(3)}", new { controller = "Comments", action = "GetById" });
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapRazorPages();
                     });

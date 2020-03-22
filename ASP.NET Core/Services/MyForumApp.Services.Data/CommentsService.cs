@@ -28,10 +28,10 @@
             return query.To<T>().ToList();
         }
 
-        public T GetById<T>(int postId)
+        public IEnumerable<T> GetById<T>(int postId)
         {
             var comment = this.commentsRepository.All().Where(x => x.PostId == postId)
-                .To<T>().FirstOrDefault();
+                .To<T>().ToList();
             return comment;
         }
     }

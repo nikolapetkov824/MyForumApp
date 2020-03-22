@@ -8,6 +8,6 @@ namespace MyForumApp.Services.Data
     {
         IEnumerable<T> GetAll<T>(int? count = null);
 
-        T GetById<T>(int postId);
+        IEnumerable<T> GetById<T>(int postId);
     }
 }
