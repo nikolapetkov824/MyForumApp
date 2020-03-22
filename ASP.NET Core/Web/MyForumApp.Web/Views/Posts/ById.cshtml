@@ -2,7 +2,7 @@
 @{
     this.ViewData["Title"] = Model.Title;
 }
-<!--POST SECTION-->>
+<!--POST SECTION-->
 <h1>@Model.Title</h1>
 <div class="container-fluid mt-100">
     <div class="row">
@@ -49,7 +49,7 @@
 
 <hr />
 <div>
-    <a asp-controller="Comments" asp-action="GetById" type="button" class="btn btn-primary" />See the comments<a />
+    <a asp-controller="Comments" asp-action="GetById" value="@Model.Id" type="button" class="btn btn-primary" />See the comments<a />
 </div>
 
 @section Scripts {

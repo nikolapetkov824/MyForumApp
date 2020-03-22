@@ -30,9 +30,9 @@
 
         public T GetById<T>(int postId)
         {
-            var category = this.commentsRepository.All().Where(x => x.PostId == postId)
+            var comment = this.commentsRepository.All().Where(x => x.PostId == postId)
                 .To<T>().FirstOrDefault();
-            return category;
+            return comment;
         }
     }
 }

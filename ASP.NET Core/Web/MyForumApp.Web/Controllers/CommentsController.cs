@@ -15,8 +15,16 @@
 
         public IActionResult GetById(int postId)
         {
-            var comments = this.commentsService.GetById<CommentViewModel>(postId);
-            return this.View(comments);
+            //var commentsViewModel = this.commentsService.GetById<CommentViewModel>(postId);
+
+            //return this.View(commentsViewModel);
+
+            var viewModel = new CommentViewModel
+            {
+                Comments =
+                    this.commentsService.GetAll<IndexCommentViewModel>(),
+            };
+            return this.View(viewModel);
         }
 
         public IActionResult AddComment()
