@@ -30,8 +30,8 @@
 
         public IEnumerable<T> GetById<T>(int postId)
         {
-            var comment = this.commentsRepository.All().Where(x => x.PostId == postId)
-                .To<T>().ToList();
+            var comment = this.commentsRepository.All().Where(x => x.PostId == postId).To<T>().ToList();
+
             return comment;
         }
     }
