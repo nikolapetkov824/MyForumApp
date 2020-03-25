@@ -7,6 +7,8 @@
 
     public class CommentViewModel : IMapFrom<Comment>
     {
+        public int PostId { get; set; }
+
         public IEnumerable<IndexCommentViewModel> Comments { get; set; }
     }
 }

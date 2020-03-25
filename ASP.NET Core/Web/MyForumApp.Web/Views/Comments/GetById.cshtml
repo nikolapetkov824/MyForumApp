@@ -34,5 +34,5 @@
 
 <hr />
 <div>
-    <a asp-controller="Comments" asp-action="CreateComment" type="button" class="btn btn-primary" />Add a comment<a />
+    <a asp-controller="Comments" asp-action="CreateComment" asp-route-postId="@Model.PostId" type="button" class="btn btn-primary" />Add a comment<a />
 </div>

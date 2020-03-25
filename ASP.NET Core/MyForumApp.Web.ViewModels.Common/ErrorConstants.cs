@@ -30,7 +30,7 @@
 
         public const string RequiredError = "You must enter a/an {0}.";
 
-        public const string StringLengthErrorMessage = "{0} must be between {1} and {2} characters long.";
+        public const string StringLengthErrorMessage = "{0} must be between {2} and {1} characters long.";
 
         public const string AlreadyExistsError = "{0} already exists.";
 

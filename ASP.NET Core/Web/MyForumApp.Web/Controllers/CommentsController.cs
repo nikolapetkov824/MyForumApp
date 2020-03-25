@@ -1,5 +1,6 @@
 ﻿namespace MyForumApp.Web.Controllers
 {
+    using System.Linq;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
@@ -26,7 +27,9 @@
         {
             var viewModel = new CommentViewModel
             {
-                Comments = this.commentsService.GetAll<IndexCommentViewModel>(),
+                Comments = this.commentsService.GetAll<IndexCommentViewModel>()
+                    .Where(c => c.PostId == postId).ToList(),
+                PostId = postId,
             };
 
             return this.View(viewModel);
@@ -65,7 +68,7 @@
                 model.PostId,
                 user.Id);
 
-            return this.RedirectToAction(nameof(this.GetById));
+            return this.RedirectToAction(nameof(this.GetById), new { postId = model.PostId });
         }
     }
 }

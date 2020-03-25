@@ -15,14 +15,15 @@
     });
 </script>
 
-<form asp-controller="Comments" asp-action="CreateComment"   method="post">
-    
+<form asp-controller="Comments" asp-action="CreateComment" method="post">
+
+    <input asp-for="@Model.PostId" type="hidden" class="text-danger" />
     <div>
         <label asp-for="Content"></label>
         <textarea asp-for="Content" class="form-control"></textarea>
         <span asp-validation-for="Content" class="text-danger"></span>
     </div>
-    
+
     <hr />
-    <input type="submit" class="btn btn-primary" /> 
+    <input type="submit" class="btn btn-primary" />
 </form>
