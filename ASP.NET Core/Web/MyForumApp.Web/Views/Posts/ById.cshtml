@@ -49,7 +49,7 @@
 
 <hr />
 <div>
-    <a asp-controller="Comments" asp-action="GetById" asp-route-id="@Model.Id"  type="button" class="btn btn-primary" />See the comments<a />
+    <a asp-controller="Comments" asp-action="GetById" asp-for="PostId" type="button" class="btn btn-primary" />See the comments<a />
 </div>
 
 @section Scripts {
