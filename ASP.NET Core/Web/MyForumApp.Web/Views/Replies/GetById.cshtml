@@ -1,0 +1,38 @@
+﻿@model MyForumApp.Web.ViewModels.Replies.ReplyViewModel
+@{
+    this.ViewData["Title"] = "Replies";
+}
+
+<div class="row d-flex justify-content-center mt-100">
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body text-center">
+                <h4 class="card-title">@this.ViewData["Title"]</h4>
+            </div>
+            @foreach (var reply in Model.Replies)
+            {
+                <div class="comment-widgets">
+                    <div class="d-flex flex-row comment-row m-t-0">
+                        <h4 class="media-heading"><a asp-controller="Comments" asp-action="GetById" asp-route-id="@reply.CommentId"></a></h4>
+                        <div class="p-2"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1574583336/AAA/4.jpg" alt="user" width="50" class="rounded-circle"></div>
+                        <div class="comment-text w-100">
+                            <h6 class="font-medium">@reply.UserUserName</h6>
+                            <span class="m-b-15 d-block">@reply.Content</span>
+                            <div class="comment-footer">
+                                <span class="text-muted float-right">@reply.CreatedOn</span>
+                                <button type="button" class="btn btn-dark btn-sm"><i class="fa fa-circle"></i>&nbsp; Edit</button>
+                                <button type="button" class="btn btn-danger btn-sm"><i class="fa fa-minus"></i>&nbsp; Delete</button>
+                                <button type="button" class="btn btn-info btn-sm"><i class="fa fa-plus"></i>&nbsp; Reply</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<hr />
+<div>
+    <a asp-controller="Replies" asp-action="CreateReply" asp-route-postId="@Model.CommentId" type="button" class="btn btn-primary" />Add reply<a />
+</div>

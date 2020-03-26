@@ -1,7 +1,7 @@
 ﻿@using System.Linq
-@model MyForumApp.Web.ViewModels.Comments.CreateCommentViewModel
+@model MyForumApp.Web.ViewModels.Replies.CreateReplyViewModel
 @{
-    this.ViewData["Title"] = "Add a new comment";
+    this.ViewData["Title"] = "Reply";
 }
 <h1>@this.ViewData["Title"]</h1>
 
@@ -15,9 +15,9 @@
     });
 </script>
 
-<form asp-controller="Comments" asp-action="CreateComment" method="post">
+<form asp-controller="Replies" asp-action="CreateReply" method="post">
 
-    <input asp-for="@Model.PostId" type="hidden" class="text-danger" />
+    <input asp-for="@Model.CommentId" type="hidden" class="text-danger" />
     <div>
         <label asp-for="@Model.Content"></label>
         <textarea asp-for="@Model.Content" class="form-control"></textarea>
