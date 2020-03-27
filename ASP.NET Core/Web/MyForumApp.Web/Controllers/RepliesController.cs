@@ -72,7 +72,7 @@
                 model.CommentId,
                 user.Id);
 
-            return this.RedirectToAction(nameof(this.GetById), new { Id = model.CommentId });
+            return this.RedirectToAction(nameof(this.GetById), new { commentId = model.CommentId });
         }
     }
 }
