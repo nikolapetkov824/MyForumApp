@@ -9,6 +9,7 @@ namespace MyForumApp.Web.ViewModels.Replies
     public class ReplyViewModel : IMapFrom<Reply>
     {
         public int CommentId { get; set; }
+        public int PostId { get; set; }
 
         public IEnumerable<IndexReplyViewModel> Replies { get; set; }
     }

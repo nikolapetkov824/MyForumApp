@@ -27,13 +27,14 @@
             this.userManager = userManager;
         }
 
-        public IActionResult GetById(int commentId)
+        public IActionResult GetById(int commentId, int postId)
         {
             var viewModel = new ReplyViewModel
             {
                 Replies = this.repliesService.GetAll<IndexReplyViewModel>()
                     .Where(c => c.CommentId == commentId).ToList(),
                 CommentId = commentId,
+                PostId = postId,
             };
 
             return this.View(viewModel);
@@ -41,7 +42,7 @@
 
         [HttpGet]
         [Authorize]
-        public IActionResult CreateReply(int commentId)
+        public IActionResult CreateReply(int commentId, int postId)
         {
             if (!this.ModelState.IsValid)
             {
@@ -51,6 +52,7 @@
             var viewModel = new CreateReplyViewModel
             {
                 CommentId = commentId,
+                PostId = postId,
             };
 
             return this.View(viewModel);
@@ -72,7 +74,7 @@
                 model.CommentId,
                 user.Id);
 
-            return this.RedirectToAction(nameof(this.GetById), new { commentId = model.CommentId });
+            return this.RedirectToAction(nameof(this.GetById), new { commentId = model.CommentId, postId = model.PostId });
         }
     }
 }

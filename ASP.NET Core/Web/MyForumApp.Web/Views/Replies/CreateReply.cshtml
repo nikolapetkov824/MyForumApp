@@ -18,6 +18,7 @@
 <form asp-controller="Replies" asp-action="CreateReply" method="post">
 
     <input asp-for="@Model.CommentId" type="hidden" class="text-danger" />
+    <input asp-for="@Model.PostId" type="hidden" class="text-danger" />
     <div>
         <label asp-for="@Model.Content"></label>
         <textarea asp-for="@Model.Content" class="form-control"></textarea>

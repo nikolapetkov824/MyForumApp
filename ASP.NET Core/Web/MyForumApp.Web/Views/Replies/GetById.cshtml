@@ -34,5 +34,6 @@
 
 <hr />
 <div>
-    <a asp-controller="Replies" asp-action="CreateReply" asp-route-commentId="@Model.CommentId" type="button" class="btn btn-primary" />Add reply<a />
+    <a asp-controller="Replies" asp-action="CreateReply" asp-route-commentId="@Model.CommentId" asp-route-postId="@Model.PostId" type="button" class="btn btn-primary" />Add reply<a />
+    <a asp-controller="Comments" asp-action="GetById" asp-route-postId="@Model.PostId" type="button" class="btn btn-primary" />Back to the comments<a />
 </div>
