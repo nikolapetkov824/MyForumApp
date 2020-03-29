@@ -22,8 +22,8 @@
                                 <div class="comment-footer">
                                     <span class="text-muted float-right">@comment.CreatedOn</span>
                                     <button type="button" class="btn btn-dark btn-sm"><i class="fa fa-circle"></i>&nbsp; Edit</button>
-                                    <button type="button" class="btn btn-danger btn-sm"><i class="fa fa-minus"></i>&nbsp; Delete</button>
-                                    <button asp-controller = "Replies" asp-action = "CreateReply" asp-route-id = "@comment.Id" type="button" class="btn btn-info btn-sm"><i class="fa fa-plus"></i>&nbsp; Reply</button>
+                                    <a asp-controller = "Replies" asp-action = "Delete" asp-route-commentId = "@comment.Id" type="button" class="btn btn-danger btn-sm"><i class="fa fa-minus"></i>&nbsp; Delete</a>
+                                    <a asp-controller = "Replies" asp-action = "CreateReply" asp-route-commentId = "@comment.Id" asp-route-postId="@comment.PostId" type="button" class="btn btn-info btn-sm"><i class="fa fa-plus"></i>&nbsp; Reply</a>
                                 </div>
                             </div>
                         </div>
@@ -31,7 +31,12 @@
 
                     <hr />
                     <div>
-                        <a asp-controller = "Replies" asp-action = "GetById" asp-route-commentId = "@comment.Id" asp-route-postId = "@comment.PostId" type = "button" class="btn btn-primary" />See the replies<a />
+                        @*<a asp-controller="Replies" asp-action="GetById" asp-route-commentId="@comment.Id" asp-route-postId="@comment.PostId" type="button" class="btn btn-primary" />See the replies<a />*@
+                        <ul>
+                            <li style="display:none;">Coffee</li>
+                            <li>Tea</li>
+                            <li>Milk</li>
+                        </ul>   
                     </div>
                     }
             </div>

@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-
+    using Microsoft.EntityFrameworkCore;
     using MyForumApp.Data.Common.Repositories;
     using MyForumApp.Data.Models;
     using MyForumApp.Services.Mapping;
@@ -19,6 +19,14 @@
         {
             this.repliesRepository = repliesRepository;
             this.commentsRepository = commentsRepository;
+        }
+
+        public T DeleteReply<T>(int? id = null)
+        {
+            var reply = this.repliesRepository.All()
+                .Where(m => m.Id == id);
+
+            return reply.To<T>().FirstOrDefault();
         }
 
         public IEnumerable<T> GetAll<T>(int? count = null)

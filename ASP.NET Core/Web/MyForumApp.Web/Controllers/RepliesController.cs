@@ -7,6 +7,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using MyForumApp.Data;
     using MyForumApp.Data.Models;
     using MyForumApp.Services.Data;
     using MyForumApp.Web.ViewModels.Replies;
@@ -16,15 +17,18 @@
         private readonly IRepliesService repliesService;
         private readonly ICommentsService commentsService;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly ApplicationDbContext dbContext;
 
         public RepliesController(
             IRepliesService repliesService,
             ICommentsService commentsService,
-            UserManager<ApplicationUser> userManager)
+            UserManager<ApplicationUser> userManager,
+            ApplicationDbContext dbContext)
         {
             this.repliesService = repliesService;
             this.commentsService = commentsService;
             this.userManager = userManager;
+            this.dbContext = dbContext;
         }
 
         public IActionResult GetById(int commentId, int postId)
@@ -75,6 +79,21 @@
                 user.Id);
 
             return this.RedirectToAction(nameof(this.GetById), new { commentId = model.CommentId, postId = model.PostId });
+        }
+
+        public IActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return this.View("Error");
+            }
+
+            var reply = this.repliesService.DeleteReply<Reply>(id);
+
+            this.dbContext.Replies.Remove(reply);
+            this.dbContext.SaveChangesAsync();
+
+            return this.RedirectToAction(nameof(this.GetById));
         }
     }
 }

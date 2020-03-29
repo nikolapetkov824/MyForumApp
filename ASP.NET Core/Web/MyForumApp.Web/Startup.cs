@@ -118,6 +118,7 @@
                         endpoints.MapControllerRoute("forumCategory", "/{name:minlength(3)}", new { controller = "Categories", action = "GetByName" });
                         endpoints.MapControllerRoute("postId", "/{name:minlength(3)}", new { controller = "Comments", action = "GetById" });
                         endpoints.MapControllerRoute("commentId", "postId", "/{name:minlength(3)}", new { controller = "Replies", action = "GetById" });
+                        //endpoints.MapControllerRoute("replyId", "/{name:minlength(3)}", new { controller = "Replies", action = "Delete" });
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapRazorPages();
                     });

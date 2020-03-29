@@ -13,5 +13,7 @@
             string content,
             int commentId,
             string userId);
+
+        T DeleteReply<T>(int? id = null);
     }
 }
