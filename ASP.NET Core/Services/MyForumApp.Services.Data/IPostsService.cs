@@ -1,5 +1,6 @@
 ﻿namespace MyForumApp.Services.Data
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using MyForumApp.Data.Models;
@@ -14,5 +15,7 @@
             string userId);
 
         T GetById<T>(int id);
+
+        IEnumerable<T> GetByCategoryId<T>(int categoryId, int? take = null, int skip = 0);
     }
 }

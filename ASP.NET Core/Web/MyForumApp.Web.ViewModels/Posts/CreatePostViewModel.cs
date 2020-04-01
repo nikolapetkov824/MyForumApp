@@ -7,7 +7,7 @@
     using MyForumApp.Services.Mapping;
     using MyForumApp.Web.ViewModels.Common;
 
-    public class CreatePostViewModel : ICreatePostViewModel, IMapTo<Post>
+    public class CreatePostViewModel : IMapTo<Post>
     {
         //[PostAlreadyExists]
         [Required(ErrorMessage = ErrorConstants.RequiredError)]
@@ -20,12 +20,7 @@
         public string Description { get; set; }
 
         public int CategoryId { get; set; }
+
         public IEnumerable<CategoryDropDownViewModel> Categories { get; set; }
-
-        //public string CategoryName { get; set; }
-
-        //public string UserId { get; set; }
-
-        //public string UserName { get; set; }
     }
 }

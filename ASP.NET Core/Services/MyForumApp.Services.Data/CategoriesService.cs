@@ -28,9 +28,11 @@
             return query.To<T>().ToList();
         }
 
-        public T GetByName<T>(string name)
+        public T GetByName<T>(string name, int? take = null, int skip = 0)
         {
-            var category = this.categoriesRepository.All().Where(x => x.Name == name)
+            var category = this.categoriesRepository
+                .All()
+                .Where(x => x.Name == name)
                 .To<T>().FirstOrDefault();
             return category;
         }
