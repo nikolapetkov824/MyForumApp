@@ -16,6 +16,11 @@ namespace MyForumApp.Data.Models
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
             this.Posts = new HashSet<Post>();
+
+            if (this.ImageUrl == null)
+            {
+                this.ImageUrl = "https://img.icons8.com/pastel-glyph/2x/user-male.png";
+            }
         }
 
         // Audit info
