@@ -10,8 +10,8 @@ using MyForumApp.Data;
 namespace MyForumApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200401162937_AddSelfReferenceComments")]
-    partial class AddSelfReferenceComments
+    [Migration("20200403141542_AddUserImageUrlMigration")]
+    partial class AddUserImageUrlMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -191,6 +191,9 @@ namespace MyForumApp.Data.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -290,6 +293,9 @@ namespace MyForumApp.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("CommentParentId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
 
@@ -312,6 +318,8 @@ namespace MyForumApp.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CommentParentId");
 
                     b.HasIndex("IsDeleted");
 
@@ -521,6 +529,10 @@ namespace MyForumApp.Data.Migrations
 
             modelBuilder.Entity("MyForumApp.Data.Models.Comment", b =>
                 {
+                    b.HasOne("MyForumApp.Data.Models.Comment", "CommentParent")
+                        .WithMany()
+                        .HasForeignKey("CommentParentId");
+
                     b.HasOne("MyForumApp.Data.Models.Post", "Post")
                         .WithMany("Comments")
                         .HasForeignKey("PostId")

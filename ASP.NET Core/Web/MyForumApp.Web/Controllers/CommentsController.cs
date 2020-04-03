@@ -61,14 +61,28 @@
                 return this.View(model);
             }
 
+            var parentId =
+                model.CommentParentId == 0 ?
+                    (int?)null :
+                    model.CommentParentId;
+
+            if (parentId.HasValue)
+            {
+                if (!this.commentsService.IsInPostId(parentId.Value, model.PostId))
+                {
+                    return this.BadRequest();
+                }
+            }
+
             var user = await this.userManager.GetUserAsync(this.User);
 
             await this.commentsService.CreateAsync(
                 model.Content,
                 model.PostId,
-                user.Id);
+                user.Id,
+                parentId);
 
-            return this.RedirectToAction(nameof(this.GetById), new { postId = model.PostId });
+            return this.RedirectToAction("ById", "Posts", new { id = model.PostId });
         }
     }
 }

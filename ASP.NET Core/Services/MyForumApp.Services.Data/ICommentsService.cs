@@ -14,6 +14,9 @@ namespace MyForumApp.Services.Data
         Task CreateAsync(
             string content,
             int postId,
-            string userId);
+            string userId,
+            int? parentId = null);
+
+        bool IsInPostId(int commentId, int postId);
     }
 }

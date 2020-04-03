@@ -32,7 +32,7 @@
         {
             var category = this.categoriesRepository
                 .All()
-                .Where(x => x.Name == name)
+                .Where(x => x.Name.Replace("-", " ") == name.Replace("-", " "))
                 .To<T>().FirstOrDefault();
             return category;
         }

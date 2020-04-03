@@ -23,7 +23,8 @@
         public async Task CreateAsync(
             string content,
             int postId,
-            string userId)
+            string userId,
+            int? parentId = null)
         {
             var post = this.postsRepository.All().Where(x => x.Id == postId).FirstOrDefault();
             var comment = new Comment
@@ -31,6 +32,7 @@
                 Content = content,
                 PostId = post.Id,
                 UserId = userId,
+                CommentParentId = parentId,
             };
 
             await this.commentsRepository.AddAsync(comment);
@@ -54,6 +56,13 @@
             var comment = this.commentsRepository.All().Where(x => x.PostId == postId).To<T>().ToList();
 
             return comment;
+        }
+
+        public bool IsInPostId(int commentId, int postId)
+        {
+            var commentPostId = this.commentsRepository.All().Where(x => x.Id == commentId)
+                .Select(x => x.PostId).FirstOrDefault();
+            return commentPostId == postId;
         }
     }
 }
