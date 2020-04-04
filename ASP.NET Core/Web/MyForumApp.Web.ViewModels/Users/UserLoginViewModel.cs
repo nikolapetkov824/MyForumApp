@@ -4,7 +4,7 @@ using System.Text;
 
 namespace MyForumApp.Web.ViewModels.Users
 {
-    class UserLoginViewModel
+    public class UserLoginViewModel
     {
     }
 }

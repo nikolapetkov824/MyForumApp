@@ -1,0 +1,35 @@
+﻿@model MyForumApp.Web.ViewModels.Users.UserRegisterViewModel
+@{
+    this.ViewData["Title"] = "Register";
+}
+    <h1>@this.ViewData["Title"]</h1>
+
+    <form asp-controller="Users" asp-action="Register" method="post">
+        <div>
+            <label asp-for="@Model.UserName"></label>
+            <input asp-for="@Model.UserName" class="form-control" />
+            <span asp-validation-for="@Model.UserName" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="@Model.Email"></label>
+            <input asp-for="@Model.Email" class="form-control">
+            <span asp-validation-for="@Model.Email" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="@Model.Password"></label>
+            <input asp-for="@Model.Password" class="form-control">
+            <span asp-validation-for="@Model.Password" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="@Model.ConfirmPassword"></label>
+            <input asp-for="@Model.ConfirmPassword" class="form-control">
+            <span asp-validation-for="@Model.ConfirmPassword" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="@Model.ImageUrl"></label>
+            <input asp-for="@Model.ImageUrl" class="form-control">
+            <span asp-validation-for="@Model.ImageUrl" class="text-danger"></span>
+        </div>
+        <hr />
+        <input type="submit" class="btn btn-primary" />
+    </form>
