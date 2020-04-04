@@ -1,12 +1,13 @@
-﻿using MyForumApp.Data.Common.Repositories;
-using MyForumApp.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MyForumApp.Services.Data
+﻿namespace MyForumApp.Services.Data
 {
+    using System;
+    using System.Security.Cryptography;
+    using System.Text;
+    using System.Threading.Tasks;
+
+    using MyForumApp.Data.Common.Repositories;
+    using MyForumApp.Data.Models;
+
     public class UsersService : IUsersService
     {
         private readonly IDeletableEntityRepository<ApplicationUser> usersRepository;
@@ -16,22 +17,43 @@ namespace MyForumApp.Services.Data
             this.usersRepository = usersRepository;
         }
 
-        public Task Login(string name, string email)
+        public async Task Register(
+            string name,
+            string email,
+            string password,
+            string imageUrl)
         {
-            throw new NotImplementedException();
-        }
+            var passwordHash = this.Hash(password);
 
-        public async Task Register(string name, string email, string imageUrl)
-        {
             var user = new ApplicationUser
             {
+                Id = Guid.NewGuid().ToString(),
                 UserName = name,
                 Email = email,
+                PasswordHash = passwordHash,
                 ImageUrl = imageUrl,
             };
 
             await this.usersRepository.AddAsync(user);
             await this.usersRepository.SaveChangesAsync();
+        }
+
+        private string Hash(string input)
+        {
+            if (input == null)
+            {
+                return null;
+            }
+
+            var crypt = new SHA256Managed();
+            var hash = new StringBuilder();
+            byte[] crypto = crypt.ComputeHash(Encoding.UTF8.GetBytes(input));
+            foreach (byte theByte in crypto)
+            {
+                hash.Append(theByte.ToString("x2"));
+            }
+
+            return hash.ToString();
         }
     }
 }

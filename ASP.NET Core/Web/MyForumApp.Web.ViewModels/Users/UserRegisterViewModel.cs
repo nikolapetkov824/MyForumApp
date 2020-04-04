@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MyForumApp.Web.ViewModels.Users
+﻿namespace MyForumApp.Web.ViewModels.Users
 {
-    public class UserRegisterViewModel
+    using MyForumApp.Data.Models;
+    using MyForumApp.Services.Mapping;
+
+    public class UserRegisterViewModel : IMapFrom<ApplicationUser>
     {
         public string UserName { get; set; }
 
@@ -15,7 +14,5 @@ namespace MyForumApp.Web.ViewModels.Users
         public string ConfirmPassword { get; set; }
 
         public string ImageUrl { get; set; }
-
-        public int PostId { get; set; }
     }
 }

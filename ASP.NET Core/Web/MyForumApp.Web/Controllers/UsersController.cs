@@ -1,14 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using MyForumApp.Services.Data;
-using MyForumApp.Web.ViewModels.Users;
-
-namespace MyForumApp.Web.Controllers
+﻿namespace MyForumApp.Web.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Security.Claims;
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+    using MyForumApp.Services.Data;
+    using MyForumApp.Web.ViewModels.Users;
+
     public class UsersController : Controller
     {
         private readonly IUsersService usersService;
@@ -19,19 +21,31 @@ namespace MyForumApp.Web.Controllers
         }
 
         [HttpGet]
-        [Authorize]
-        public IActionResult Register()
+        public IActionResult Login()
         {
-            return this.View("/Users/Register");
+            return this.View();
         }
 
         [HttpPost]
-        [Authorize]
+        public IActionResult Login(UserLoginViewModel model)
+        {
+            this.SignIn(ClaimsPrincipal.Current, authenticationScheme: model.UserName);
+
+            return this.Redirect("/");
+        }
+
+        [HttpGet]
+        public IActionResult Register()
+        {
+            return this.View();
+        }
+
+        [HttpPost]
         public IActionResult Register(UserRegisterViewModel model)
         {
-            this.usersService.Register(model.UserName, model.Email, model.ImageUrl);
+            this.usersService.Register(model.UserName, model.Email, model.Password, model.ImageUrl);
 
-            return this.RedirectToAction("ById", "Posts", new { id = model.PostId });
+            return this.RedirectToAction("Login");
         }
     }
 }
