@@ -17,7 +17,7 @@
                         <div class="card mb-4">
                             <div class="card-header">
                                 <div class="media flex-wrap w-100 align-items-center">
-                                    <img src="@Model.UserImageUrl" class="d-block ui-w-40 rounded-circle" alt="" width="100">
+                                    <img src="@comment.UserImageUrl" class="d-block ui-w-40 rounded-circle" alt="" width="50">
                                     <div class="media-body ml-3">
                                         @comment.UserUserName
                                         <div class="text-muted small">
@@ -60,7 +60,7 @@
             <div class="card mb-4">
                 <div class="card-header">
                     <div class="media flex-wrap w-100 align-items-center">
-                        <img src="@Model.UserImageUrl" class="d-block ui-w-40 rounded-circle" alt="" width="100">
+                        <img src="@Model.UserImageUrl" class="d-block ui-w-40 rounded-circle" alt="" width="50">
                         <div class="media-body ml-3">
                             @Model.UserUserName
                             <div class="text-muted small">
@@ -120,6 +120,12 @@
             <input type="submit" class="btn btn-primary" value="Add comment" />
         </div>
     </form>
+</div>
+
+<hr />
+<div>
+    <a asp-controller="Categories" asp-action="GetByName" type="button" class="btn btn-primary" />Back to the Category<a />
+    <input asp-for="@Model.CategoryName" type="hidden" class="text-danger" />
 </div>
 
 

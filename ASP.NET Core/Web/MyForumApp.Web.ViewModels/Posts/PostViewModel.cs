@@ -13,6 +13,8 @@
     {
         public int Id { get; set; }
 
+        public string CategoryName { get; set; }
+
         public DateTime CreatedOn { get; set; }
 
         public string Title { get; set; }

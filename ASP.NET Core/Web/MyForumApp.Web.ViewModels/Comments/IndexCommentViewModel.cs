@@ -23,6 +23,8 @@
 
         public string UserUserName { get; set; }
 
+        public string UserImageUrl { get; set; }
+
         public DateTime CreatedOn { get; set; }
     }
 }
