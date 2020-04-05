@@ -31,7 +31,6 @@
                 return this.NotFound();
             }
 
-
             viewModel.ForumPosts = this.postsService.GetByCategoryId<PostInCategoryViewModel>(viewModel.Id, ItemsPerPage, (page - 1) * ItemsPerPage);
 
             var count = this.postsService.GetCountByCategoryId(viewModel.Id);
