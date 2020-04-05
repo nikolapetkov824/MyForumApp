@@ -14,6 +14,8 @@ namespace MyForumApp.Web.ViewModels.Replies
 
         public int PostId { get; set; }
 
+        public string UserImageUrl { get; set; }
+
         public IEnumerable<IndexReplyViewModel> Replies { get; set; }
     }
 }

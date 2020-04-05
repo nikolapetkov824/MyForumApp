@@ -14,7 +14,7 @@
                 <div class="comment-widgets">
                     <div class="d-flex flex-row comment-row m-t-0">
                         <h4 class="media-heading"><a asp-controller="Replies" asp-action="GetById" asp-route-commentId="@reply.CommentId"></a></h4>
-                        <div class="p-2"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1574583336/AAA/4.jpg" alt="user" width="50" class="rounded-circle"></div>
+                        <div class="p-2"><img src="@Model.UserImageUrl" alt="user" width="50" class="rounded-circle"></div>
                         <div class="comment-text w-100">
                             <h6 class="font-medium">@reply.UserUserName</h6>
                             <span class="m-b-15 d-block">@reply.Content</span>

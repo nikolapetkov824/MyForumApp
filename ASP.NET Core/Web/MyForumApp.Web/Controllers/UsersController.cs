@@ -7,17 +7,26 @@
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using MyForumApp.Data.Models;
     using MyForumApp.Services.Data;
     using MyForumApp.Web.ViewModels.Users;
 
     public class UsersController : Controller
     {
         private readonly IUsersService usersService;
+        private readonly UserManager<ApplicationUser> userManager;
+        private readonly SignInManager<ApplicationUser> signInManager;
 
-        public UsersController(IUsersService usersService)
+        public UsersController(
+            IUsersService usersService,
+            UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager)
         {
             this.usersService = usersService;
+            this.userManager = userManager;
+            this.signInManager = signInManager;
         }
 
         [HttpGet]
@@ -27,9 +36,10 @@
         }
 
         [HttpPost]
-        public IActionResult Login(UserLoginViewModel model)
+        public async Task<IActionResult> Login(UserLoginViewModel model)
         {
-            this.SignIn(ClaimsPrincipal.Current, authenticationScheme: model.UserName);
+            var user = this.usersService.Login(model.UserName, model.Password);
+            await this.signInManager.SignInAsync(user, null);
 
             return this.Redirect("/");
         }
@@ -41,9 +51,10 @@
         }
 
         [HttpPost]
-        public IActionResult Register(UserRegisterViewModel model)
+        public async Task<IActionResult> Register(UserRegisterViewModel model)
         {
-            this.usersService.Register(model.UserName, model.Email, model.Password, model.ImageUrl);
+            var user = this.usersService.Register(model.UserName, model.Email, model.Password, model.ImageUrl);
+            await this.userManager.CreateAsync(user);
 
             return this.RedirectToAction("Login");
         }

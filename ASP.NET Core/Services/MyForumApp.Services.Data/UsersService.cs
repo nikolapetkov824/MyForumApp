@@ -1,10 +1,11 @@
 ﻿namespace MyForumApp.Services.Data
 {
     using System;
+    using System.Linq;
     using System.Security.Cryptography;
     using System.Text;
     using System.Threading.Tasks;
-
+    using Microsoft.AspNetCore.Identity;
     using MyForumApp.Data.Common.Repositories;
     using MyForumApp.Data.Models;
 
@@ -17,7 +18,21 @@
             this.usersRepository = usersRepository;
         }
 
-        public async Task Register(
+        public ApplicationUser Login(
+            string name,
+            string password)
+        {
+            var passwordHash = this.Hash(password);
+
+            var user = this.usersRepository
+                .All()
+                .Where(x => x.UserName == name && x.PasswordHash == passwordHash)
+                .FirstOrDefault();
+
+            return user;
+        }
+
+        public ApplicationUser Register(
             string name,
             string email,
             string password,
@@ -34,8 +49,7 @@
                 ImageUrl = imageUrl,
             };
 
-            await this.usersRepository.AddAsync(user);
-            await this.usersRepository.SaveChangesAsync();
+            return user;
         }
 
         private string Hash(string input)
