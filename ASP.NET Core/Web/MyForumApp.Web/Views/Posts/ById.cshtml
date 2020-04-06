@@ -124,7 +124,7 @@
 
 <hr />
 <div>
-    <a asp-controller="Categories" asp-action="GetByName" type="button" class="btn btn-primary" />Back to the Category<a />
+    <a asp-controller="Categories" asp-action="GetByName" asp-route-name="@Model.CategoryName" type="button" class="btn btn-primary" />Back to the Category<a />
     <input asp-for="@Model.CategoryName" type="hidden" class="text-danger" />
 </div>
 
