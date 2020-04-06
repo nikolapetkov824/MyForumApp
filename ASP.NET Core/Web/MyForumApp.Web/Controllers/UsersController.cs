@@ -53,6 +53,11 @@
         [HttpPost]
         public async Task<IActionResult> Register(UserRegisterViewModel model)
         {
+            if (model.ImageUrl == null)
+            {
+                model.ImageUrl = model.DefaultImageUrl;
+            }
+
             var user = this.usersService.Register(model.UserName, model.Email, model.Password, model.ImageUrl);
             await this.userManager.CreateAsync(user);
 
