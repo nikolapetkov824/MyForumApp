@@ -25,7 +25,7 @@
                     <div class="card-header">
                         <div class="media flex-wrap w-100 align-items-center">
                             <div class="media-body ml-3">
-                                <h4 class="media-heading"><a asp-controller="Posts" asp-action="ById" asp-route-id="@post.Id">@post.Title by @post.UserUserName</a></h4>
+                                <h4 class="media-heading"><a asp-controller="Posts" asp-action="ById" asp-route-id="@post.Id">@post.Title</a></h4>
                                 <input asp-for="@Model.Title" type="hidden" class="text-danger" />
                                 <div class="text-muted small">
                                     <time datetime="@post.CreatedOn"></time>
@@ -35,7 +35,7 @@
                     </div>
                     <div class="card-body">
                         <article>
-                            @post.ShortContent
+                            <button asp-controller="PostDetails" asp-action="GetById" asp-route-id="@post.Id" type="button">Details</button>
                         </article>
                     </div>
                 </div>

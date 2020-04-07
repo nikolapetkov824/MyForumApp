@@ -68,5 +68,11 @@
         {
             return this.postsRepository.All().Count(x => x.CategoryId == categoryId);
         }
+
+        public T GetPostDetails<T>(int postId)
+        {
+            return this.postsRepository.All().Where(x => x.Id == postId)
+                .To<T>().FirstOrDefault();
+        }
     }
 }
