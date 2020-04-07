@@ -1,0 +1,26 @@
+﻿@model MyForumApp.Web.ViewModels.Posts.PostViewModel
+@{
+    this.ViewData["Title"] = "Post";
+}
+
+<div>
+    <ul>
+        <li>
+            @Model.CategoryName
+        </li>
+        <li>
+            @Model.CreatedOn
+        </li>
+        <li>
+            @Model.UserUserName
+        </li>
+        <li>
+            @Model.SanitizedContent
+        </li>
+        <li>
+            @Model.VotesCount
+        </li>
+        <li>
+        </li>
+    </ul>
+</div>

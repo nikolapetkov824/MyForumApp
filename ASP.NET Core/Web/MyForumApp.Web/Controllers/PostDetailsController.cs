@@ -29,20 +29,14 @@
             this.dbContext = dbContext;
         }
 
-        public IActionResult GetById(int postId)
+        public IActionResult Details(int postId)
         {
-            var post = this.postsService.GetPostDetails<PostDetailsViewModel>(postId);
+            var post = this.postsService.GetById<PostViewModel>(postId);
 
-            //var viewModel = new PostDetailsViewModel
-            //{
-            //    CategoryName = post.CategoryName,
-            //    CreatedOn = post.CreatedOn,
-            //    Title = post.Title,
-            //    Description = post.Description,
-            //    UserUserName = post.UserUserName,
-            //    VotesCount = post.VotesCount,
-            //    CommentsCount = post.CommentsCount,
-            //};
+            if (post == null)
+            {
+                return this.NotFound();
+            }
 
             return this.View(post);
         }

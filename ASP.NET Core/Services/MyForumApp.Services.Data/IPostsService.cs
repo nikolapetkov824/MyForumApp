@@ -16,8 +16,6 @@
 
         T GetById<T>(int id);
 
-        T GetPostDetails<T>(int postId);
-
         IEnumerable<T> GetByCategoryId<T>(int categoryId, int? take = null, int skip = 0);
 
         int GetCountByCategoryId(int categoryId);
