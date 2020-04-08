@@ -1,10 +1,10 @@
 ﻿namespace MyForumApp.Web.Controllers
 {
+    using System;
+
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.Extensions.Logging;
     using MyForumApp.Services.Data;
     using MyForumApp.Web.ViewModels.Categories;
-    using System;
 
     public class CategoriesController : Controller
     {

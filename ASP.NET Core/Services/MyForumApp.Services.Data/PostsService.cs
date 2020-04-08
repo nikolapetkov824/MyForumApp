@@ -56,6 +56,17 @@
             return query.To<T>().ToList();
         }
 
+        public IEnumerable<T> GetByCategoryId2<T>(int categoryId)
+        {
+            IQueryable<Post> query =
+                this.postsRepository
+                .All()
+                .OrderByDescending(x => x.CreatedOn)
+                .Where(x => x.CategoryId == categoryId);
+
+            return query.To<T>().ToList();
+        }
+
         public T GetById<T>(int id)
         {
             var post = this.postsRepository.All().Where(x => x.Id == id)

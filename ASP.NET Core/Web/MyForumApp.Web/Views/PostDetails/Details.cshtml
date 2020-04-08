@@ -1,26 +1,66 @@
-﻿@model MyForumApp.Web.ViewModels.Posts.PostViewModel
+﻿@model MyForumApp.Web.ViewModels.Posts.PostDetailsViewModel
 @{
     this.ViewData["Title"] = "Post";
 }
 
-<div>
-    <ul>
-        <li>
-            @Model.CategoryName
-        </li>
-        <li>
-            @Model.CreatedOn
-        </li>
-        <li>
-            @Model.UserUserName
-        </li>
-        <li>
-            @Model.SanitizedContent
-        </li>
-        <li>
-            @Model.VotesCount
-        </li>
-        <li>
-        </li>
-    </ul>
+<!-- Page Content -->
+<div class="container">
+
+    <!-- Portfolio Item Heading -->
+    <h1 class="my-4">
+        Title:
+        <small>@Model.Title</small>
+    </h1>
+
+    <!-- Portfolio Item Row -->
+    <div class="row">
+
+        <div class="col-md-8">
+            <img class="img-fluid" src="http://placehold.it/750x500" alt="">
+        </div>
+
+        <div class="col-md-4">
+            <h3 class="my-3">Post Details</h3>
+            <ul>
+                <li>Category: @Model.CategoryName</li>
+                <li>Created on: @Model.CreatedOn</li>
+                <li>Description: @Model.SanitizedContent</li>
+                <li>Posted by: @Model.UserUserName</li>
+                <li>Votes: @Model.VotesCount</li>
+                <li>Comments: @Model.CommentsCount</li>
+            </ul>
+        </div>
+
+    </div>
+    <!-- /.row -->
+    <!-- Related Projects Row -->
+    <h3 class="my-4">Related Posts</h3>
+
+    <div class="row">
+
+        @foreach (var post in Model.ForumPosts)
+        {
+            @*<div class="col-md-3 col-sm-6 mb-4">
+                <div>
+                    <a asp-controller="PostDetails" asp-action="Details" asp-route-postId="@post.Id" asp-route-categoryId="@post.Id">@post.Title</a>
+                    <input asp-for="@Model.Id" type="hidden" class="text-danger" />
+                    <input asp-for="@Model.CategoryId" type="hidden" class="text-danger" />
+                </div>
+            </div>*@
+            <div class="col-md-3 col-sm-6 mb-4">
+                <a href="#">
+                    <img class="img-fluid" src="http://placehold.it/500x300" alt="">
+                </a>
+            </div>
+        }
+
+        <div class="col-md-3 col-sm-6 mb-4">
+            <a href="#">
+                <img class="img-fluid" src="http://placehold.it/500x300" alt="">
+            </a>
+        </div>
+    </div>
+    <!-- /.row -->
+
 </div>
+<!-- /.container -->
