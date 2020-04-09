@@ -35,7 +35,7 @@
                     </div>
                     <div class="card-body">
                         <article>
-                            <a asp-controller="PostDetails" asp-action="Details" asp-route-postId="@post.Id">Details</a>
+                            <a asp-controller="PostDetails" asp-action="Details" asp-route-postId="@post.Id" asp-route-categoryId="@Model.Id">Details</a>
                             <input asp-for="@Model.Title" type="hidden" class="text-danger" />
                             <input asp-for="@Model.Id" type="hidden" class="text-danger" />
                         </article>

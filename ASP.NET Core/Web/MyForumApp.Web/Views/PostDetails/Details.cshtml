@@ -40,25 +40,15 @@
 
         @foreach (var post in Model.ForumPosts)
         {
-            @*<div class="col-md-3 col-sm-6 mb-4">
+            <div class="col-md-3 col-sm-6 mb-4">
                 <div>
-                    <a asp-controller="PostDetails" asp-action="Details" asp-route-postId="@post.Id" asp-route-categoryId="@post.Id">@post.Title</a>
+                    <a asp-controller="PostDetails" asp-action="Details" asp-route-postId="@post.Id" asp-route-categoryId="@Model.CategoryId">@post.Title</a>
                     <input asp-for="@Model.Id" type="hidden" class="text-danger" />
                     <input asp-for="@Model.CategoryId" type="hidden" class="text-danger" />
-                </div>
-            </div>*@
-            <div class="col-md-3 col-sm-6 mb-4">
-                <a href="#">
                     <img class="img-fluid" src="http://placehold.it/500x300" alt="">
-                </a>
+                </div>
             </div>
         }
-
-        <div class="col-md-3 col-sm-6 mb-4">
-            <a href="#">
-                <img class="img-fluid" src="http://placehold.it/500x300" alt="">
-            </a>
-        </div>
     </div>
     <!-- /.row -->
 
