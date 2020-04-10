@@ -6,12 +6,6 @@
 <!-- Page Content -->
 <div class="container">
 
-    <!-- Portfolio Item Heading -->
-    @*<h1 class="my-4">
-        Title:
-        <small>@Model.Title</small>
-    </h1>*@
-
     <!-- Portfolio Item Row -->
     <div class="row">
 
@@ -26,7 +20,7 @@
         </div>
 
         <div>
-            <a asp-controller="Posts" asp-action="ById" asp-route-id="@Model.Id">See this post</a>
+            <a asp-controller="Posts" asp-action="ById" asp-route-id="@Model.Id">Go to this post</a>
         </div>
 
         <div class="col-md-4">
@@ -50,16 +44,9 @@
 
         @foreach (var post in Model.ForumPosts)
         {
-            @*<div class="col-md-3 col-sm-6 mb-4">
-                <div>
-                    <a asp-controller="PostDetails" asp-action="Details" asp-route-postId="@post.Id" asp-route-categoryId="@Model.CategoryId">@post.Title</a>
-                    <input asp-for="@Model.Id" type="hidden" class="text-danger" />
-                    <input asp-for="@Model.CategoryId" type="hidden" class="text-danger" />
-                </div>
-            </div>*@
             <a asp-controller="PostDetails" asp-action="Details" asp-route-postId="@post.Id" asp-route-categoryId="@Model.CategoryId" class="list-group-item list-group-item-action flex-column align-items-start ">
                 <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1" >@post.Title</h5>
+                    <h5 class="mb-1">@post.Title</h5>
                     <small>@post.DaysAgo days ago</small>
                 </div>
                 <p class="mb-1">@post.ShortContent</p>
@@ -70,30 +57,8 @@
 
 </div>
 <!-- /.container -->
-
-@*<div class="list-group">
-    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
-        <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">List group item heading</h5>
-            <small>3 days ago</small>
-        </div>
-        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-        <small>Donec id elit non mi porta.</small>
-    </a>
-    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-        <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">List group item heading</h5>
-            <small class="text-muted">3 days ago</small>
-        </div>
-        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-        <small class="text-muted">Donec id elit non mi porta.</small>
-    </a>
-    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-        <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">List group item heading</h5>
-            <small class="text-muted">3 days ago</small>
-        </div>
-        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-        <small class="text-muted">Donec id elit non mi porta.</small>
-    </a>
-</div>*@
+<hr />
+<div>
+    <a asp-controller="Categories" asp-action="GetByName" asp-route-name="@Model.CategoryName" type="button" class="btn btn-primary" />Back to the Category<a />
+    <input asp-for="@Model.CategoryName" type="hidden" class="text-danger" />
+</div>
