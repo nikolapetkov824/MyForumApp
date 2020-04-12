@@ -19,6 +19,8 @@
 
         public int PageCount { get; set; }
 
+        public string SortBy { get; set; }
+
         public IEnumerable<PostInCategoryViewModel> ForumPosts { get; set; }
     }
 }

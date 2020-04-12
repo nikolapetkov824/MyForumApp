@@ -1,7 +1,7 @@
 ﻿namespace MyForumApp.Web.Controllers
 {
     using System;
-
+    using System.Linq;
     using Microsoft.AspNetCore.Mvc;
     using MyForumApp.Services.Data;
     using MyForumApp.Web.ViewModels.Categories;
@@ -21,7 +21,7 @@
             this.postsService = postsService;
         }
 
-        public IActionResult GetByName(string name, int page = 1)
+        public IActionResult GetByName(string name, int page = 1, string sortBy = null)
         {
             var viewModel =
                 this.categoriesService.GetByName<CategoryViewModel>(name);
@@ -42,6 +42,13 @@
             }
 
             viewModel.CurrentPage = page;
+
+            viewModel.ForumPosts = sortBy switch
+            {
+                "Date" => viewModel.ForumPosts.OrderByDescending(x => x.CreatedOn),
+                "Comments" => viewModel.ForumPosts.OrderByDescending(x => x.CommentsCount),
+                _ => viewModel.ForumPosts.OrderBy(x => x.Id),
+            };
 
             return this.View(viewModel);
         }
