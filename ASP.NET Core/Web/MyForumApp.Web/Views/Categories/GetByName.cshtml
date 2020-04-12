@@ -9,66 +9,22 @@
 </div>
 
 <hr />
-
-<div>
-    <a href="/Posts/CreatePost" type="button" class="btn btn-primary" />Add a new post<a />
-    <div class="dropdown position-relative" id="dd">
-        <button type="button" data-boundary="window" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-            Dropdown
-        </button>
-        <div class="dropdown-menu">
-            <a class="dropdown-item" data-boundary="window" href="#">Link 1</a>
-            <a class="dropdown-item" data-boundary="window" href="#">Link 1</a>
-            <a class="dropdown-item" data-boundary="window" href="#">Link 1</a>
+<div class="row">
+    <div class="col-6">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Sort By
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" asp-controller="Categories" asp-action="GetByName" asp-route-sortBy="Date">Date</a>
+                <a class="dropdown-item" asp-controller="Categories" asp-action="GetByName" asp-route-sortBy="Comments">Comments</a>
+            </div>
         </div>
     </div>
-
-    <div class="dropdown">
-        <button class="btn btn-primary dropdown-toggle" data-boundary="dd" type="button" data-toggle="dropdown">
-            Sort by
-            <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu">
-            <li><a href="#" id="drop1" data-toggle="dropdown" data-flip="false">Date</a></li>
-            <li><a href="#" id="drop2" data-toggle="dropdown" data-flip="false">Comments</a></li>
-            <li><a href="#" id="drop3" data-toggle="dropdown" data-flip="false">Votes</a></li>
-        </ul>
+    <div class="col-6 text-right">
+        <a asp-controller="Posts" asp-action="CreatePost" class="create-post-btn btn btn-primary" />Add a new post<a />
     </div>
-
-    <div class="dropdown position-relative" id="dd">
-        <button type="button" data-boundary="dd" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-            Dropdown
-        </button>
-        <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Link 1</a>
-            <a class="dropdown-item" href="#">Link 1</a>
-            <a class="dropdown-item" href="#">Link 1</a>
-            <a class="dropdown-item" href="#">Link 1</a>
-            <a class="dropdown-item" href="#">Link 1</a>
-            <a class="dropdown-item" href="#">Link 1</a>
-            <a class="dropdown-item" href="#">Link 1</a>
-            <a class="dropdown-item" href="#">Link 1</a>
-            <a class="dropdown-item" href="#">Link 1</a>
-            <a class="dropdown-item" href="#">Link 1</a>
-            ...
-        </div>
-    </div>
-
 </div>
-
-
-@*<div class="dropdown">
-    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-        Sort by
-        <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu">
-        <li><a href="#">Date</a></li>
-        <li><a href="#">Comments</a></li>
-        <li><a href="#">Votes</a></li>
-    </ul>
-</div>*@
-
 <hr />
 
 @foreach (var post in Model.ForumPosts)
