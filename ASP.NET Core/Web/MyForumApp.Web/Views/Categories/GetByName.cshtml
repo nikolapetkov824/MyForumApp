@@ -12,7 +12,62 @@
 
 <div>
     <a href="/Posts/CreatePost" type="button" class="btn btn-primary" />Add a new post<a />
+    <div class="dropdown position-relative" id="dd">
+        <button type="button" data-boundary="window" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+            Dropdown
+        </button>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" data-boundary="window" href="#">Link 1</a>
+            <a class="dropdown-item" data-boundary="window" href="#">Link 1</a>
+            <a class="dropdown-item" data-boundary="window" href="#">Link 1</a>
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" data-boundary="dd" type="button" data-toggle="dropdown">
+            Sort by
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a href="#" id="drop1" data-toggle="dropdown" data-flip="false">Date</a></li>
+            <li><a href="#" id="drop2" data-toggle="dropdown" data-flip="false">Comments</a></li>
+            <li><a href="#" id="drop3" data-toggle="dropdown" data-flip="false">Votes</a></li>
+        </ul>
+    </div>
+
+    <div class="dropdown position-relative" id="dd">
+        <button type="button" data-boundary="dd" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+            Dropdown
+        </button>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">Link 1</a>
+            <a class="dropdown-item" href="#">Link 1</a>
+            <a class="dropdown-item" href="#">Link 1</a>
+            <a class="dropdown-item" href="#">Link 1</a>
+            <a class="dropdown-item" href="#">Link 1</a>
+            <a class="dropdown-item" href="#">Link 1</a>
+            <a class="dropdown-item" href="#">Link 1</a>
+            <a class="dropdown-item" href="#">Link 1</a>
+            <a class="dropdown-item" href="#">Link 1</a>
+            <a class="dropdown-item" href="#">Link 1</a>
+            ...
+        </div>
+    </div>
+
 </div>
+
+
+@*<div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+        Sort by
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+        <li><a href="#">Date</a></li>
+        <li><a href="#">Comments</a></li>
+        <li><a href="#">Votes</a></li>
+    </ul>
+</div>*@
 
 <hr />
 
@@ -35,7 +90,9 @@
                     </div>
                     <div class="card-body">
                         <article>
-                            <button asp-controller="PostDetails" asp-action="GetById" asp-route-id="@post.Id" type="button">Details</button>
+                            <a asp-controller="PostDetails" asp-action="Details" asp-route-postId="@post.Id" asp-route-categoryId="@Model.Id">Details</a>
+                            <input asp-for="@Model.Title" type="hidden" class="text-danger" />
+                            <input asp-for="@Model.Id" type="hidden" class="text-danger" />
                         </article>
                     </div>
                 </div>

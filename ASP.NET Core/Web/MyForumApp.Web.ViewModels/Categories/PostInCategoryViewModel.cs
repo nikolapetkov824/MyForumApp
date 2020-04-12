@@ -13,6 +13,29 @@
 
         public DateTime CreatedOn { get; set; }
 
+        public string DaysAgo
+        {
+            get
+            {
+                // 1.
+                // Parse the date and put in DateTime object.
+                DateTime startDate = DateTime.Parse(this.CreatedOn.ToString());
+
+                // 2.
+                // Get the current DateTime.
+                DateTime now = DateTime.Now;
+
+                // 3.
+                // Get the TimeSpan of the difference.
+                TimeSpan elapsed = now.Subtract(startDate);
+
+                // 4.
+                // Get number of days ago.
+                double daysAgo = elapsed.TotalDays;
+                return daysAgo.ToString("0");
+            }
+        }
+
         public string Title { get; set; }
 
         public string Description { get; set; }

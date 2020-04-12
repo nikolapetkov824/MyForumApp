@@ -10,6 +10,7 @@
     using MyForumApp.Data;
     using MyForumApp.Data.Models;
     using MyForumApp.Services.Data;
+    using MyForumApp.Web.ViewModels.Categories;
     using MyForumApp.Web.ViewModels.Posts;
     using MyForumApp.Web.ViewModels.Replies;
 
@@ -29,20 +30,16 @@
             this.dbContext = dbContext;
         }
 
-        public IActionResult GetById(int postId)
+        public IActionResult Details(int postId, int categoryId)
         {
-            var post = this.postsService.GetPostDetails<PostDetailsViewModel>(postId);
+            var post = this.postsService.GetById<PostDetailsViewModel>(postId);
 
-            //var viewModel = new PostDetailsViewModel
-            //{
-            //    CategoryName = post.CategoryName,
-            //    CreatedOn = post.CreatedOn,
-            //    Title = post.Title,
-            //    Description = post.Description,
-            //    UserUserName = post.UserUserName,
-            //    VotesCount = post.VotesCount,
-            //    CommentsCount = post.CommentsCount,
-            //};
+            if (post == null)
+            {
+                return this.NotFound();
+            }
+
+            post.ForumPosts = this.postsService.GetByCategoryId2<PostInCategoryViewModel>(categoryId);
 
             return this.View(post);
         }

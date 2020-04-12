@@ -1,0 +1,64 @@
+﻿@model MyForumApp.Web.ViewModels.Posts.PostDetailsViewModel
+@{
+    this.ViewData["Title"] = "Post";
+}
+
+<!-- Page Content -->
+<div class="container">
+
+    <!-- Portfolio Item Row -->
+    <div class="row">
+
+        <div class="col-md-8">
+            <a asp-controller="PostDetails" asp-action="Details" asp-route-postId="@Model.Id" asp-route-categoryId="@Model.CategoryId" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">@Model.Title</h5>
+                    <small>@Model.DaysAgo days ago</small>
+                </div>
+                <p class="mb-1">@Model.SanitizedContent</p>
+            </a>
+        </div>
+
+        <div>
+            <a asp-controller="Posts" asp-action="ById" asp-route-id="@Model.Id">Go to this post</a>
+        </div>
+
+        <div class="col-md-4">
+            <h3 class="my-3">Post Details</h3>
+            <ul>
+                <li>Category: @Model.CategoryName</li>
+                <li>Created on: @Model.CreatedOn</li>
+                <li>Description: @Model.SanitizedContent</li>
+                <li>Posted by: @Model.UserUserName</li>
+                <li>Votes: @Model.VotesCount</li>
+                <li>Comments: @Model.CommentsCount</li>
+            </ul>
+        </div>
+
+    </div>
+    <!-- /.row -->
+    <!-- Related Projects Row -->
+    <h3 class="my-4">Related Posts</h3>
+
+    <div class="list-group">
+
+        @foreach (var post in Model.ForumPosts)
+        {
+            <a asp-controller="PostDetails" asp-action="Details" asp-route-postId="@post.Id" asp-route-categoryId="@Model.CategoryId" class="list-group-item list-group-item-action flex-column align-items-start ">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">@post.Title</h5>
+                    <small>@post.DaysAgo days ago</small>
+                </div>
+                <p class="mb-1">@post.ShortContent</p>
+            </a>
+        }
+    </div>
+    <!-- /.row -->
+
+</div>
+<!-- /.container -->
+<hr />
+<div>
+    <a asp-controller="Categories" asp-action="GetByName" asp-route-name="@Model.CategoryName" type="button" class="btn btn-primary" />Back to the Category<a />
+    <input asp-for="@Model.CategoryName" type="hidden" class="text-danger" />
+</div>

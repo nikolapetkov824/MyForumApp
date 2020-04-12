@@ -75,6 +75,10 @@
         "plugins/code/plugin.min.js",
         "plugins/media/plugin.min.js"
       ]
+    },
+    {
+      "library": "popper.js@1.16.1",
+      "destination": "wwwroot/lib/popper.js"
     }
   ]
 }
