@@ -3,13 +3,29 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>@this.ViewData["Title"] - @GlobalConstants.SystemName</title>
 
     <link href="~/lib/fontawesome/css/all.css" rel="stylesheet" asp-append-version="true" />
     <environment names="Development">
-        <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" asp-append-version="true" />
-        <link href="~/css/site.css" rel="stylesheet" asp-append-version="true" />
+        @*<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" asp-append-version="true" />*@
+        @*<link href="~/css/site.css" rel="stylesheet" asp-append-version="true" />*@
+        <link href="~/img/favicon.png" rel="icon" asp-append-version="true">
+        <link href="~/img/apple-touch-icon.png" rel="apple-touch-icon" asp-append-version="true">
+
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+        <!-- Vendor CSS Files -->
+        <link href="~/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" asp-append-version="true">
+        <link href="~/vendor/icofont/icofont.min.css" rel="stylesheet" asp-append-version="true">
+        <link href="~/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" asp-append-version="true">
+        <link href="~/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet" asp-append-version="true">
+        <link href="~/vendor/venobox/venobox.css" rel="stylesheet" asp-append-version="true">
+        <link href="~/vendor/aos/aos.css" rel="stylesheet" asp-append-version="true">
+
+        <!-- Template Main CSS File -->
+        <link href="~/css/style.css" rel="stylesheet" asp-append-version="true">
     </environment>
     <environment names="Staging,Production">
         <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" asp-append-version="true" />
@@ -36,14 +52,96 @@
             </div>
         </nav>
     </header>
-    
-    <div class="container">
+
+    <!-- ======= Hero Section ======= -->
+    <section id="hero" class="d-flex align-items-center">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 d-lg-flex flex-lg-column justify-content-center align-items-stretch pt-5 pt-lg-0 order-2 order-lg-1" data-aos="fade-up">
+                    <div>
+                        <h1>@GlobalConstants.SystemName</h1>
+                        <a href="#" class="download-btn"><i class="bx bxl-play-store"></i> Google Play</a>
+                        <a href="#" class="download-btn"><i class="bx bxl-apple"></i> App Store</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 d-lg-flex flex-lg-column align-items-stretch order-1 order-lg-2 hero-img" data-aos="fade-up">
+                    <img src="~/img/hero-img.png" class="img-fluid" alt="">
+                </div>
+            </div>
+        </div>
+
+    </section><!-- End Hero -->
+
+    <main id="main">
+
+        <!-- ======= App Features Section ======= -->
+        <section id="features" class="features">
+            <div class="container">
+
+                @*<div class="section-title">
+                    <h2>App Features</h2>
+                    <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+                </div>*@
+
+                <div class="row no-gutters">
+                    <div class="col-xl-7 d-flex align-items-stretch order-2 order-lg-1">
+            <div class="content d-flex flex-column justify-content-center">
+                <div class="row">
+                    <div class="col-md-6 icon-box" data-aos="fade-up">
+                        <i class="bx bx-receipt"></i>
+                        <h4>Corporis voluptates sit</h4>
+                        <p>Consequuntur sunt aut quasi enim aliquam quae harum pariatur laboris nisi ut aliquip</p>
+                    </div>
+                    <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="100">
+                        <i class="bx bx-cube-alt"></i>
+                        <h4>Ullamco laboris nisi</h4>
+                        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt</p>
+                    </div>
+                    <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="200">
+                        <i class="bx bx-images"></i>
+                        <h4>Labore consequatur</h4>
+                        <p>Aut suscipit aut cum nemo deleniti aut omnis. Doloribus ut maiores omnis facere</p>
+                    </div>
+                    <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="300">
+                        <i class="bx bx-shield"></i>
+                        <h4>Beatae veritatis</h4>
+                        <p>Expedita veritatis consequuntur nihil tempore laudantium vitae denat pacta</p>
+                    </div>
+                    <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="400">
+                        <i class="bx bx-atom"></i>
+                        <h4>Molestiae dolor</h4>
+                        <p>Et fuga et deserunt et enim. Dolorem architecto ratione tensa raptor marte</p>
+                    </div>
+                    <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="500">
+                        <i class="bx bx-id-card"></i>
+                        <h4>Explicabo consectetur</h4>
+                        <p>Est autem dicta beatae suscipit. Sint veritatis et sit quasi ab aut inventore</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="image col-xl-5 d-flex align-items-stretch justify-content-center order-1 order-lg-2" data-aos="fade-left" data-aos-delay="100">
+            <img src="~/img/features.svg" class="img-fluid" alt="">
+        </div>
+                    <partial name="_CookieConsentPartial" />
+                        @this.RenderBody()
+                    @*<main role="main" class="pb-3">
+                    </main>*@
+                </div>
+
+            </div>
+        </section>
+
+    </main><!-- End #main -->
+
+    @*<div class="container">
         <partial name="_CookieConsentPartial" />
         <main role="main" class="pb-3">
             @this.RenderBody()
         </main>
-    </div>
-    
+    </div>*@
+
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; @DateTime.Now.Year - @GlobalConstants.SystemName - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
@@ -51,12 +149,25 @@
     </footer>
 
     <environment names="Development">
+        <!-- Vendor JS Files -->
         <script src="~/lib/popper.js/dist/umd/popper.js" asp-append-version="true"></script>
-        <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
+        <script src="~/vendor/jquery/jquery.min.js" asp-append-version="true"></script>
+        <script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js" asp-append-version="true"></script>
+        <script src="~/vendor/jquery.easing/jquery.easing.min.js" asp-append-version="true"></script>
+        <script src="~/vendor/php-email-form/validate.js" asp-append-version="true"></script>
+        <script src="~/vendor/owl.carousel/owl.carousel.min.js" asp-append-version="true"></script>
+        <script src="~/vendor/venobox/venobox.min.js" asp-append-version="true"></script>
+        <script src="~/vendor/aos/aos.js" asp-append-version="true"></script>
+
+        <!-- Template Main JS File -->
+
+        @*<script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
         <script src="~/lib/jquery-validation/dist/jquery.validate.js" asp-append-version="true"></script>
         <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.js" asp-append-version="true"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js" asp-append-version="true"></script>*@
+
+        <script src="~/js/main.js" asp-append-version="true"></script>
+        @*<script src="~/js/site.js" asp-append-version="true"></script>*@
     </environment>
     <environment names="Staging,Production">
         <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
