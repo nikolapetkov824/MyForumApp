@@ -72,5 +72,37 @@
 
             return this.RedirectToAction(nameof(this.ById), new { id = postId });
         }
+
+        [HttpGet]
+        public IActionResult EditPost(int id)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View("Error");
+            }
+
+            var viewModel = this.postsService.GetById<PostViewModel>(id);
+
+            //InvalidOperationException: Can't figure out why I can't see the View
+
+            return this.View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditPost(PostViewModel model)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+
+            //InvalidOperationException: Missing map from Post to Post ???
+
+            var user = await this.userManager.GetUserAsync(this.User);
+
+            var postId = await this.postsService.EditPostContent(model.Id, model.Description);
+
+            return this.RedirectToAction(nameof(this.ById), new { id = postId });
+        }
     }
 }

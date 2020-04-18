@@ -21,5 +21,7 @@
         IEnumerable<T> GetByCategoryId2<T>(int categoryId);
 
         int GetCountByCategoryId(int categoryId);
+
+        Task<int> EditPostContent(int id, string description);
     }
 }

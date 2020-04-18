@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using Ganss.XSS;
     using MyForumApp.Data.Common.Repositories;
     using MyForumApp.Data.Models;
     using MyForumApp.Services.Mapping;
@@ -78,6 +79,16 @@
         public int GetCountByCategoryId(int categoryId)
         {
             return this.postsRepository.All().Count(x => x.CategoryId == categoryId);
+        }
+
+        public async Task<int> EditPostContent(int id, string description)
+        {
+            var post = this.GetById<Post>(id);
+            post.Description = new HtmlSanitizer().Sanitize(description);
+            this.postsRepository.Update(post);
+            await this.postsRepository.SaveChangesAsync();
+
+            return post.Id;
         }
     }
 }
