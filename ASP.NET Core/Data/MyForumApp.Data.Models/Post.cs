@@ -4,6 +4,7 @@
     using System.ComponentModel.DataAnnotations;
 
     using MyForumApp.Data.Common.Models;
+    using MyForumApp.Services.Mapping;
 
     public class Post : BaseDeletableModel<int>
     {

@@ -23,6 +23,11 @@
 
         public IActionResult GetByName(string name, int page = 1, string sortBy = null)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.Redirect("Error");
+            }
+
             var viewModel =
                 this.categoriesService.GetByName<CategoryViewModel>(name);
 

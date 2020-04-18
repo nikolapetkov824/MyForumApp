@@ -1,0 +1,26 @@
+﻿@model MyForumApp.Web.ViewModels.Posts.PostViewModel
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<h1>Editing post with title @ViewData["Title"]</h1>
+
+<script src="~/lib/tinymce/tinymce.min.js"></script>
+<script type="text/javascript">
+    tinymce.init({
+        selector: '#mytextarea',
+        plugins: [
+            "image paste table link code media"
+        ]
+    });
+</script>
+
+<form asp-controller="Posts" asp-action="EditPost" asp-route-id="@Model.Id" method="post">
+    <div class="form-group">
+        <label asp-for="@Model.Description"></label>
+        <textarea asp-for="@Model.Description" id="mytextarea">@Model.Description</textarea>
+        <input asp-for="@Model.Id" type="hidden" />
+    </div>
+    <button type="submit" class="btn btn-success">Submit</button>
+    <button type="reset" class="btn btn-danger">Reset</button>
+</form>
