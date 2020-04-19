@@ -1,5 +1,6 @@
 ﻿namespace MyForumApp.Services.Data.Tests
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -10,12 +11,14 @@
     using MyForumApp.Data.Common.Repositories;
     using MyForumApp.Data.Models;
     using MyForumApp.Data.Repositories;
+    using MyForumApp.Services.Data;
     using MyForumApp.Services.Mapping;
     using MyForumApp.Web.ViewModels.Posts;
     using Xunit;
 
     public class PostsServiceTests
     {
+
         [Fact]
         public void GetCountByCategoryIdShouldReturnCorrectNumber()
         {
@@ -48,51 +51,92 @@
         }
 
         [Fact]
-        public void GetByIdShouldReturnCorrectPost()
+        public async Task GetByIdShouldReturnCorrectPostUsingDbContext()
         {
-            /// I HAVE SPENT ALMOST 10 HOURS TRYING TO MAKE THIS WORK
-            /// END RESULT: NOT WORKING !!!
-            /// I HAVE TRIED EVERYTHING TO NO AVAIL
-            var expected = new Post
-            {
-                Id = 3,
-            };
-            var repository = new Mock<IDeletableEntityRepository<Post>>();
-            repository.Setup(r => r.All()).Returns(new List<Post>
-                                                        {
-                                                            new Post() { Id = 3 },
-                                                            new Post() { Id = 4 },
-                                                            new Post() { Id = 5 },
-                                                        }.AsQueryable());
-            var service = new PostsService(repository.Object);
-            var actual = service.GetById<Post>(3);
-            //repository.Verify(x => x.GetById<PostViewModel>(3), Times.Once);
-            var post = repository.Object.All().Where(x => x.Id == 3).To<Post>().FirstOrDefault();
-            Assert.Equal(expected, post);
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(Guid.NewGuid().ToString());
+            var repository = new EfDeletableEntityRepository<Post>(new ApplicationDbContext(options.Options));
+            repository.AddAsync(new Post { Id = 3, Title = "test" }).GetAwaiter().GetResult();
+            repository.SaveChangesAsync().GetAwaiter().GetResult();
+            var postService = new PostsService(repository);
+            AutoMapperConfig.RegisterMappings(typeof(MyTestPost).Assembly);
+            var post = postService.GetById<MyTestPost>(3);
 
+            Assert.Equal("test", post.Title);
         }
 
         [Fact]
-        public async Task GetByIdShouldReturnCorrectPostUsingDbContext()
+        public async Task GetByCategoryIdShouldReturnCorrectPostsUsingDbContext()
         {
-            var expected = new Post
-            {
-                Id = 3,
-            };
-
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(databaseName: "PostsByIdTestDb").Options;
-            var dbContext = new ApplicationDbContext(options);
-            dbContext.Posts.Add(new Post() { Id = 3, Title = "test", });
-            dbContext.Posts.Add(new Post() { Id = 4 });
-            dbContext.Posts.Add(new Post() { Id = 5 });
-            await dbContext.SaveChangesAsync();
+                .UseInMemoryDatabase(Guid.NewGuid().ToString());
+            var repository = new EfDeletableEntityRepository<Post>(new ApplicationDbContext(options.Options));
+            repository.AddAsync(new Post { Id = 3, CategoryId = 1, Title = "test" }).GetAwaiter().GetResult();
+            repository.AddAsync(new Post { Id = 4, CategoryId = 1, Title = "b" }).GetAwaiter().GetResult();
+            repository.AddAsync(new Post { Id = 5, CategoryId = 2, Title = "c" }).GetAwaiter().GetResult();
+            repository.AddAsync(new Post { Id = 6, CategoryId = 2, Title = "d" }).GetAwaiter().GetResult();
+            repository.SaveChangesAsync().GetAwaiter().GetResult();
+            var postService = new PostsService(repository);
+            AutoMapperConfig.RegisterMappings(typeof(MyTestPost).Assembly);
+            var posts = postService.GetByCategoryId<MyTestPost>(1);
 
-            var repository = new EfDeletableEntityRepository<Post>(dbContext);
-            var service = new PostsService(repository);
-            AutoMapperConfig.RegisterMappings(typeof(Post).Assembly);
-            var actual = service.GetById<Post>(3);
-            Assert.Equal("test", actual.Title);
+            Assert.Equal(2, posts.Count());
+        }
+
+        /// <summary>
+        /// I have no idea how to test this method.
+        /// Maybe I need to implement another method for
+        /// finding Posts ,but using a different parameter,
+        /// different from PostId.
+        /// </summary>
+        /// <returns></returns>
+        [Fact]
+        public async Task CreateAsyncShouldReturnCreatedPostIdUsingDbContext()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(Guid.NewGuid().ToString());
+            var repository = new EfDeletableEntityRepository<Post>(new ApplicationDbContext(options.Options));
+            repository.AddAsync(new Post { Id = 3, CategoryId = 1, Title = "test" }).GetAwaiter().GetResult();
+            repository.AddAsync(new Post { Id = 4, CategoryId = 1, Title = "b" }).GetAwaiter().GetResult();
+            repository.AddAsync(new Post { Id = 5, CategoryId = 2, Title = "c" }).GetAwaiter().GetResult();
+            repository.AddAsync(new Post { Id = 6, CategoryId = 2, Title = "d" }).GetAwaiter().GetResult();
+            repository.SaveChangesAsync().GetAwaiter().GetResult();
+            var postService = new PostsService(repository);
+            AutoMapperConfig.RegisterMappings(typeof(MyTestPost).Assembly);
+            var post = postService.CreateAsync("title", "description", 1, "userId");
+            //var byCategoryId = postService.GetByCategoryId<MyTestPost>(1);
+            //var findPost = byCategoryId.Where(x => x.Title == "title").FirstOrDefault();
+
+            Assert.Equal(1, post.Id);
+        }
+
+        [Fact]
+        public async Task EditPostContentShouldReturnCreatedPostIdUsingDbContext()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(Guid.NewGuid().ToString());
+            var repository = new EfDeletableEntityRepository<Post>(new ApplicationDbContext(options.Options));
+            repository.AddAsync(new Post { Id = 1, CategoryId = 2, Title = "test", Description = "notChanged" }).GetAwaiter().GetResult();
+            repository.SaveChangesAsync().GetAwaiter().GetResult();
+            var postService = new PostsService(repository);
+            AutoMapperConfig.RegisterMappings(typeof(MyTestPost).Assembly);
+            var post = postService.EditPostContent(1, "description");
+            //var byCategoryId = postService.GetByCategoryId<MyTestPost>(1);
+            //var findPost = byCategoryId.Where(x => x.Title == "title").FirstOrDefault();
+
+            Assert.Equal(1, post.Id);
+            //Assert.Equal("description", post.GetType().FullName);
+        }
+
+        public class MyTestPost : IMapFrom<Post>
+        {
+            public int Id { get; set; }
+
+            public int CategoryId { get; set; }
+
+            public string Title { get; set; }
+
+            public string Description { get; set; }
         }
     }
 }

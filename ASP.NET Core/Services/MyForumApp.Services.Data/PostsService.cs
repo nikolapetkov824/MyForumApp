@@ -83,12 +83,21 @@
 
         public async Task<int> EditPostContent(int id, string description)
         {
-            var post = this.GetById<Post>(id);
+            var post = this.GetById(id);
             post.Description = new HtmlSanitizer().Sanitize(description);
+
             this.postsRepository.Update(post);
             await this.postsRepository.SaveChangesAsync();
 
             return post.Id;
+        }
+
+        private Post GetById(int id)
+        {
+            var post = this.postsRepository.All().Where(x => x.Id == id)
+                .FirstOrDefault();
+
+            return post;
         }
     }
 }
