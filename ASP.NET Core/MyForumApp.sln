@@ -39,7 +39,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyForumApp.Web.Tests", "Tes
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyForumApp.Web.ViewModels", "Web\MyForumApp.Web.ViewModels\MyForumApp.Web.ViewModels.csproj", "{13B7AACB-9C85-4409-8D4B-95A67D0DFFF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyForumApp.Web.ViewModels.Common", "MyForumApp.Web.ViewModels.Common\MyForumApp.Web.ViewModels.Common.csproj", "{68DFB284-5DEE-4D44-AE1D-FE3E0D67ECAD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyForumApp.Web.ViewModels.Common", "MyForumApp.Web.ViewModels.Common\MyForumApp.Web.ViewModels.Common.csproj", "{68DFB284-5DEE-4D44-AE1D-FE3E0D67ECAD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

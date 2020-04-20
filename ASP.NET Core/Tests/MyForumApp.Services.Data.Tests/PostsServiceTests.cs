@@ -18,7 +18,6 @@
 
     public class PostsServiceTests
     {
-
         [Fact]
         public void GetCountByCategoryIdShouldReturnCorrectNumber()
         {
