@@ -2,6 +2,7 @@
 {
     using System;
     using System.Linq;
+
     using Microsoft.AspNetCore.Mvc;
     using MyForumApp.Services.Data;
     using MyForumApp.Web.ViewModels.Categories;
@@ -60,7 +61,6 @@
             }
 
             viewModel.CurrentPage = page;
-
 
             return this.View(viewModel);
         }

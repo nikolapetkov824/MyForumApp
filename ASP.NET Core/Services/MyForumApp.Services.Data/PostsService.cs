@@ -4,11 +4,11 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using Ganss.XSS;
     using MyForumApp.Data.Common.Repositories;
     using MyForumApp.Data.Models;
     using MyForumApp.Services.Mapping;
-    using MyForumApp.Web.ViewModels.Posts;
 
     public class PostsService : IPostsService
     {

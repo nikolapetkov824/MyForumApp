@@ -3,9 +3,6 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    using MyForumApp.Data.Models;
-    using MyForumApp.Web.ViewModels.Posts;
-
     public interface IPostsService
     {
         Task<int> CreateAsync(

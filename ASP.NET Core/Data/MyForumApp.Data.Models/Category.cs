@@ -1,6 +1,7 @@
 ﻿namespace MyForumApp.Data.Models
 {
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using AutoMapper.Configuration;
     using MyForumApp.Data.Common.Models;
     using MyForumApp.Services.Mapping;
