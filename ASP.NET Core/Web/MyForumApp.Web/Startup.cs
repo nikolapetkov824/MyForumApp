@@ -1,8 +1,7 @@
 ﻿namespace MyForumApp.Web
 {
     using System.Reflection;
-    using AutoMapper;
-    using AutoMapper.Configuration;
+
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -79,9 +78,6 @@
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
-
-            var config = new MapperConfigurationExpression();
-            config.CreateMap<Category, Category>();
 
             // Seed data on application startup
             using (var serviceScope = app.ApplicationServices.CreateScope())

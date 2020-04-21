@@ -39,7 +39,7 @@
                 return this.NotFound();
             }
 
-            post.ForumPosts = this.postsService.GetByCategoryId2<PostInCategoryViewModel>(categoryId);
+            post.ForumPosts = this.postsService.GetByCategoryIdWithoutSkip<PostInCategoryViewModel>(categoryId);
 
             return this.View(post);
         }

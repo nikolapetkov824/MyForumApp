@@ -40,7 +40,7 @@
             return post.Id;
         }
 
-        public IEnumerable<T> GetByCategoryId<T>(int categoryId, int? take = null, int skip = 0)
+        public IEnumerable<T> GetByCategoryId<T>(int categoryId, int? take = null, int skip = 0, string sortBy = null)
         {
             IQueryable<Post> query =
                 this.postsRepository
@@ -48,6 +48,13 @@
                 .OrderByDescending(x => x.CreatedOn)
                 .Where(x => x.CategoryId == categoryId)
                 .Skip(skip);
+
+            //query = sortBy switch
+            //{
+            //    "Date" => query.OrderByDescending(x => x.CreatedOn),
+            //    "Comments" => query.OrderByDescending(x => x.Comments),
+            //    _ => query.OrderBy(x => x.Id),
+            //};
 
             if (take.HasValue)
             {
@@ -57,7 +64,7 @@
             return query.To<T>().ToList();
         }
 
-        public IEnumerable<T> GetByCategoryId2<T>(int categoryId)
+        public IEnumerable<T> GetByCategoryIdWithoutSkip<T>(int categoryId)
         {
             IQueryable<Post> query =
                 this.postsRepository
