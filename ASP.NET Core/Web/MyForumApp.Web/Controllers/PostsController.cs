@@ -7,6 +7,7 @@
     using Microsoft.AspNetCore.Mvc;
     using MyForumApp.Data.Models;
     using MyForumApp.Services.Data;
+    using MyForumApp.Web.ViewModels;
     using MyForumApp.Web.ViewModels.Posts;
 
     public class PostsController : Controller
@@ -37,11 +38,11 @@
         }
 
         [Authorize]
-        public IActionResult CreatePost()
+        public IActionResult CreatePost(ErrorViewModel error)
         {
             if (!this.ModelState.IsValid)
             {
-                return this.View("Error");
+                return this.View(error);
             }
 
             var categories = this.categoriesService.GetAll<CategoryDropDownViewModel>();

@@ -4,11 +4,11 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using Ganss.XSS;
     using MyForumApp.Data.Common.Repositories;
     using MyForumApp.Data.Models;
     using MyForumApp.Services.Mapping;
-    using MyForumApp.Web.ViewModels.Posts;
 
     public class PostsService : IPostsService
     {
@@ -40,7 +40,7 @@
             return post.Id;
         }
 
-        public IEnumerable<T> GetByCategoryId<T>(int categoryId, int? take = null, int skip = 0)
+        public IEnumerable<T> GetByCategoryId<T>(int categoryId, int? take = null, int skip = 0, string sortBy = null)
         {
             IQueryable<Post> query =
                 this.postsRepository
@@ -48,6 +48,13 @@
                 .OrderByDescending(x => x.CreatedOn)
                 .Where(x => x.CategoryId == categoryId)
                 .Skip(skip);
+
+            //query = sortBy switch
+            //{
+            //    "Date" => query.OrderByDescending(x => x.CreatedOn),
+            //    "Comments" => query.OrderByDescending(x => x.Comments),
+            //    _ => query.OrderBy(x => x.Id),
+            //};
 
             if (take.HasValue)
             {
@@ -57,7 +64,7 @@
             return query.To<T>().ToList();
         }
 
-        public IEnumerable<T> GetByCategoryId2<T>(int categoryId)
+        public IEnumerable<T> GetByCategoryIdWithoutSkip<T>(int categoryId)
         {
             IQueryable<Post> query =
                 this.postsRepository
@@ -83,12 +90,21 @@
 
         public async Task<int> EditPostContent(int id, string description)
         {
-            var post = this.GetById<Post>(id);
+            var post = this.GetById(id);
             post.Description = new HtmlSanitizer().Sanitize(description);
+
             this.postsRepository.Update(post);
             await this.postsRepository.SaveChangesAsync();
 
             return post.Id;
+        }
+
+        private Post GetById(int id)
+        {
+            var post = this.postsRepository.All().Where(x => x.Id == id)
+                .FirstOrDefault();
+
+            return post;
         }
     }
 }

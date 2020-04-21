@@ -5,20 +5,18 @@
 
     using MyForumApp.Data.Models;
     using MyForumApp.Services.Mapping;
-    using MyForumApp.Web.ViewModels.Common;
 
     public class CreatePostViewModel : IMapTo<Post>
     {
-        //[PostAlreadyExists]
-        [Required(ErrorMessage = ErrorConstants.RequiredError)]
-        [RegularExpression(ModelsConstants.NamesRegex, ErrorMessage = ErrorConstants.NamesAllowedCharactersError)]
-        [StringLength(ErrorConstants.MaximumNamesLength, ErrorMessage = ErrorConstants.StringLengthErrorMessage, MinimumLength = ErrorConstants.MinimumNamesLength)]
+        [Required]
+        [MinLength(5)]
         public string Title { get; set; }
 
-        [Required(ErrorMessage = ErrorConstants.RequiredError)]
-        [StringLength(ErrorConstants.MaximumPostDescriptionLength, ErrorMessage = ErrorConstants.StringLengthErrorMessage, MinimumLength = ErrorConstants.MinimumPostDescriptionLength)]
+        [Required]
+        [MinLength(5)]
         public string Description { get; set; }
 
+        [Range(1, int.MaxValue)]
         public int CategoryId { get; set; }
 
         public IEnumerable<CategoryDropDownViewModel> Categories { get; set; }

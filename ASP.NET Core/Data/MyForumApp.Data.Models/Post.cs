@@ -4,7 +4,6 @@
     using System.ComponentModel.DataAnnotations;
 
     using MyForumApp.Data.Common.Models;
-    using MyForumApp.Services.Mapping;
 
     public class Post : BaseDeletableModel<int>
     {
@@ -14,15 +13,19 @@
             this.Votes = new HashSet<Vote>();
         }
 
+        [Required]
         public string Title { get; set; }
 
+        [Required]
         public string Description { get; set; }
 
         [Required]
+        [Range(1, int.MaxValue)]
         public string UserId { get; set; }
 
         public virtual ApplicationUser User { get; set; }
 
+        [Range(1, int.MaxValue)]
         public int CategoryId { get; set; }
 
         public virtual Category Category { get; set; }

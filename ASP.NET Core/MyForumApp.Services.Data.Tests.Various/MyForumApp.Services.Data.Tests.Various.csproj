@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Data\MyForumApp.Data.Models\MyForumApp.Data.Models.csproj" />
+    <ProjectReference Include="..\Data\MyForumApp.Data\MyForumApp.Data.csproj" />
+    <ProjectReference Include="..\Services\MyForumApp.Services.Mapping\MyForumApp.Services.Mapping.csproj" />
+    <ProjectReference Include="..\Web\MyForumApp.Web.ViewModels\MyForumApp.Web.ViewModels.csproj" />
+    <ProjectReference Include="..\Web\MyForumApp.Web\MyForumApp.Web.csproj" />
+  </ItemGroup>
+
+</Project>
