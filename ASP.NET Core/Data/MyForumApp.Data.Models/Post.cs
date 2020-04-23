@@ -20,7 +20,6 @@
         public string Description { get; set; }
 
         [Required]
-        [Range(1, int.MaxValue)]
         public string UserId { get; set; }
 
         public virtual ApplicationUser User { get; set; }

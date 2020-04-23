@@ -5,6 +5,7 @@
 
     using MyForumApp.Data.Models;
     using MyForumApp.Services.Mapping;
+    using MyForumApp.Web.ViewModels.Common;
 
     public class CreatePostViewModel : IMapTo<Post>
     {
@@ -13,7 +14,10 @@
         public string Title { get; set; }
 
         [Required]
-        [MinLength(5)]
+        [StringLength(
+            ErrorConstants.MaximumPostDescriptionLength,
+            ErrorMessage = ErrorConstants.StringLengthErrorMessage,
+            MinimumLength = ErrorConstants.MinimumPostDescriptionLength)]
         public string Description { get; set; }
 
         [Range(1, int.MaxValue)]
