@@ -23,7 +23,7 @@
                 ("News", "https://tinyurl.com/yx47x3no"),
                 ("Music", "https://tinyurl.com/y7979n33"),
                 ("Programming", "https://tinyurl.com/y785qopu"),
-                ("Cats", "https://tinyurl.com/y9556mth"),
+                ("Cats", "https://tinyurl.com/rjvll5q"),
                 ("Dogs", "https://tinyurl.com/sgxels3"),
                 ("Video Games", "https://tinyurl.com/y9spk64y"),
                 ("Cars", "https://tinyurl.com/y7lugo6l"),

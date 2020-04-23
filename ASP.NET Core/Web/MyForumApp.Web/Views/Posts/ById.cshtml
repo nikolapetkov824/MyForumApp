@@ -69,18 +69,25 @@
                             </div>
                         </div>
                         <div class="text-muted small ml-3">
-                            <form id="votesForm" method="post"></form>
-                            <div>
-                                <a href="#" onclick="sendVote(@Model.Id, true)">
-                                    <i class="fa fa-thumbs-up"></i>
-                                </a>
-                            </div>
-                            <div id="votesCount">@Model.VotesCount</div>
-                            <div>
-                                <a href="#" onclick="sendVote(@Model.Id, false)">
-                                    <i class="fa fa-thumbs-down"></i>
-                                </a>
-                            </div>
+                            @if (this.User.Identity.IsAuthenticated)
+                            {
+                                <form id="votesForm" method="post"></form>
+                                <div>
+                                    <a href="#" onclick="sendVote(@Model.Id, true)">
+                                        <i class="fa fa-thumbs-up"></i>
+                                    </a>
+                                </div>
+                                <div id="votesCount">@Model.VotesCount</div>
+                                <div>
+                                    <a href="#" onclick="sendVote(@Model.Id, false)">
+                                        <i class="fa fa-thumbs-down"></i>
+                                    </a>
+                                </div>
+                            }
+                            else
+	                        {
+                                <div id="votesCount">@Model.VotesCount</div>
+	                        }
                         </div>
                     </div>
                 </div>
@@ -97,8 +104,11 @@
                         //Returns: NullReferenceException and InvalidOperationException:
                         //
                         <div class="px-4 pt-3">
-                            <a asp-controller="Posts" asp-action="EditPost" asp-route-id="@Model.Id" method="get" type="button" class="btn btn-primary float-left">Edit Post</a>
-                            <input asp-for="@Model.Id" type="hidden" />
+                            @if (this.User.IsInRole("Admin"))
+                            {
+                                <a asp-controller="Posts" asp-action="EditPost" asp-route-id="@Model.Id" method="get" type="button" class="btn btn-primary float-left">Edit Post</a>
+                                <input asp-for="@Model.Id" type="hidden" />
+                            }
                             <button type="button" class="btn btn-primary float-right" onclick="showAddCommentForm(0)"><i class="fa fa-plus"></i>&nbsp; Comment</button>
                         </div>
                         <div class="clearfix"></div>
