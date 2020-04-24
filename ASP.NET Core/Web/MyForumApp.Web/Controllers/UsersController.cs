@@ -38,6 +38,13 @@
             return this.View();
         }
 
+
+        /// <summary>
+        /// When I try to login with freshly registered user I get
+        /// ArgumentNullException: Value cannot be null. (Parameter 'user').
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Login(UserLoginViewModel model)
         {
@@ -45,7 +52,7 @@
                 model.UserName,
                 model.Password);
 
-            await this.signInManager.SignInAsync(user, null);
+            await this.signInManager.SignInAsync(user, false);
 
             await this.CreateRolesandUsers(user);
 

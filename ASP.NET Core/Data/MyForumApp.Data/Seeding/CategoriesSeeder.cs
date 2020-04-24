@@ -21,7 +21,7 @@
                 ("Sport", "https://tinyurl.com/y6vnfzhf"),
                 ("Coronavirus", "https://tinyurl.com/ycbgyoch"),
                 ("News", "https://tinyurl.com/yx47x3no"),
-                ("Music", "https://tinyurl.com/y7979n33"),
+                ("Music", "https://tinyurl.com/yb5pzhmr"),
                 ("Programming", "https://tinyurl.com/y785qopu"),
                 ("Cats", "https://tinyurl.com/rjvll5q"),
                 ("Dogs", "https://tinyurl.com/sgxels3"),
