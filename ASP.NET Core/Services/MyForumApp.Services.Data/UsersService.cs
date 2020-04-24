@@ -18,6 +18,15 @@
             this.usersRepository = usersRepository;
         }
 
+
+        /// <summary>
+        /// When I include Password hash it the method returns
+        /// Null Exception. I dont know how to fix it, because
+        /// it worked fine just a couple of days ago.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         public ApplicationUser Login(
             string name,
             string password)
@@ -26,7 +35,7 @@
 
             var user = this.usersRepository
                 .All()
-                .Where(x => x.UserName == name && x.PasswordHash == passwordHash)
+                .Where(x => x.UserName == name)
                 .FirstOrDefault();
 
             return user;
