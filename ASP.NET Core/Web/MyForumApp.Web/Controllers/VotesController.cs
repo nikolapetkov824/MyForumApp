@@ -28,6 +28,11 @@
         [Authorize]
         public async Task<ActionResult<VoteResponseModel>> Post(VoteInputModel voteInputModel)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.Redirect("Error");
+            }
+
             var userId = this.userManager.GetUserId(this.User);
 
             await this.votesService.VoteAsync(

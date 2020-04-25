@@ -2,7 +2,9 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Linq;
+
     using AutoMapper;
     using Ganss.XSS;
     using MyForumApp.Data.Models;
@@ -11,6 +13,7 @@
 
     public class PostViewModel : IMapFrom<Post>, IMapTo<Post>, IHaveCustomMappings
     {
+        [Required]
         public int Id { get; set; }
 
         public string CategoryName { get; set; }

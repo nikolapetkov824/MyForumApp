@@ -124,27 +124,6 @@
 
 <partial name="_CommentPartial" />
 
-@*<script src="/lib/tinymce/tinymce.min.js" type="text/javascript"></script>
-<script type="text/javascript">
-    tinymce.init({
-        selector: "textarea",
-        plugins: ["image paste table link code media"]
-    });
-</script>
-<div>
-    <form asp-controller="Comments" asp-action="CreateComment" method="post" id="AddCommentForm" style="display: none">
-        <input type="hidden" name="PostId" value="@this.Model.Id" />
-        <input type="hidden" name="CommentParentId" value="0" />
-        <div>
-            <label for="Content"></label>
-            <textarea name="Content" id="Content" class="form-control"></textarea>
-        </div>
-        <div>
-            <input type="submit" class="btn btn-primary" value="Add comment" />
-        </div>
-    </form>
-</div>*@
-
 <hr />
 <div>
     <a asp-controller="Categories" asp-action="GetByName" asp-route-name="@Model.CategoryName" type="button" class="btn btn-primary" />Back to the Category<a />

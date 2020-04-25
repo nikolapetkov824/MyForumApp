@@ -27,6 +27,11 @@
         [AllowAnonymous]
         public IActionResult GetById(int postId)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.Redirect("Error");
+            }
+
             var viewModel = new CommentViewModel
             {
                 Comments = this.commentsService.GetAll<IndexCommentViewModel>()

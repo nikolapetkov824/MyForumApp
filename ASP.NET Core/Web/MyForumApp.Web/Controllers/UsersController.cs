@@ -68,6 +68,11 @@
         [HttpPost]
         public async Task<IActionResult> Register(UserRegisterViewModel model)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.Redirect("Error");
+            }
+
             if (model.ImageUrl == null)
             {
                 model.ImageUrl = model.DefaultImageUrl;
