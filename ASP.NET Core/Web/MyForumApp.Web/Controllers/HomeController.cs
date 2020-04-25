@@ -21,6 +21,11 @@
         [AllowAnonymous]
         public IActionResult Index()
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.Redirect("Error");
+            }
+
             var viewModel = new IndexViewModel
             {
                 Categories =

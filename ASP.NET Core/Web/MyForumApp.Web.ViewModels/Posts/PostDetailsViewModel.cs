@@ -1,15 +1,18 @@
-﻿using Ganss.XSS;
-using MyForumApp.Data.Models;
-using MyForumApp.Services.Mapping;
-using MyForumApp.Web.ViewModels.Categories;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MyForumApp.Web.ViewModels.Posts
+﻿namespace MyForumApp.Web.ViewModels.Posts
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Text;
+
+    using Ganss.XSS;
+    using MyForumApp.Data.Models;
+    using MyForumApp.Services.Mapping;
+    using MyForumApp.Web.ViewModels.Categories;
+
     public class PostDetailsViewModel : IMapFrom<Post>, IMapTo<Post>
     {
+        [Required]
         public int Id { get; set; }
 
         public string CategoryName { get; set; }
