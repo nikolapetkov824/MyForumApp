@@ -3,10 +3,12 @@
     using System;
     using System.Linq;
 
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using MyForumApp.Services.Data;
     using MyForumApp.Web.ViewModels.Categories;
 
+    [Authorize]
     public class CategoriesController : Controller
     {
         private const int ItemsPerPage = 5;
@@ -29,6 +31,7 @@
         /// <param name="page"></param>
         /// <param name="sortBy"></param>
         /// <returns></returns>
+        [AllowAnonymous]
         public IActionResult GetByName(string name, int page = 1, string sortBy = null)
         {
             if (!this.ModelState.IsValid)

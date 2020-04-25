@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using AutoMapper;
     using AutoMapper.Configuration;
     using Microsoft.EntityFrameworkCore;
@@ -87,6 +88,20 @@
             var categoriesService = new CommentsService(commentsRepository, postsRepository);
             var categories = categoriesService.GetAll<CommentViewModel>(1);
             Assert.Single(categories);
+        }
+
+        [Fact]
+        public async Task GetAllShouldReturnExceptionUsingDbContext()
+        {
+            AutoMapperConfig.RegisterMappings(typeof(Post).Assembly);
+            var commentsRepository = new Mock<IDeletableEntityRepository<Comment>>();
+            var postsRepository = new Mock<IDeletableEntityRepository<Post>>();
+            commentsRepository.Setup(r => r.All()).Returns(new List<Comment>
+                                                        {
+                                                        }.AsQueryable());
+            var service = new CommentsService(commentsRepository.Object, postsRepository.Object);
+
+            Assert.Throws<InvalidOperationException>(() => service.GetAll<CommentViewModel>(0).Count());
         }
 
         public class MyTestComment : IMapFrom<Comment>, IMapTo<Comment>

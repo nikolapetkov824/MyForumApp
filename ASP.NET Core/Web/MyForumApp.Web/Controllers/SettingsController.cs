@@ -3,12 +3,14 @@
     using System;
     using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using MyForumApp.Data.Common.Repositories;
     using MyForumApp.Data.Models;
     using MyForumApp.Services.Data;
     using MyForumApp.Web.ViewModels.Settings;
 
+    [Authorize]
     public class SettingsController : BaseController
     {
         private readonly ISettingsService settingsService;
@@ -21,6 +23,7 @@
             this.repository = repository;
         }
 
+        [AllowAnonymous]
         public IActionResult Index()
         {
             var settings = this.settingsService.GetAll<SettingViewModel>();
@@ -28,6 +31,7 @@
             return this.View(model);
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> InsertSetting()
         {
             var random = new Random();

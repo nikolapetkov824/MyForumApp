@@ -24,8 +24,8 @@
             this.userManager = userManager;
         }
 
-        [Authorize]
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<VoteResponseModel>> Post(VoteInputModel voteInputModel)
         {
             var userId = this.userManager.GetUserId(this.User);
