@@ -10,6 +10,7 @@
     using MyForumApp.Web.ViewModels;
     using MyForumApp.Web.ViewModels.Posts;
 
+    [Authorize]
     public class PostsController : Controller
     {
         private readonly IPostsService postsService;
@@ -26,6 +27,7 @@
             this.userManager = userManager;
         }
 
+        [AllowAnonymous]
         public IActionResult ById(int id)
         {
             var postViewModel = this.postsService.GetById<PostViewModel>(id);
@@ -75,6 +77,7 @@
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult EditPost(int id)
         {
             if (!this.ModelState.IsValid)
@@ -90,6 +93,7 @@
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> EditPost(PostViewModel model)
         {
             if (!this.ModelState.IsValid)

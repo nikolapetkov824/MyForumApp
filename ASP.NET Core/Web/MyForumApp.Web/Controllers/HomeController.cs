@@ -2,11 +2,13 @@
 {
     using System.Diagnostics;
 
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using MyForumApp.Services.Data;
     using MyForumApp.Web.ViewModels;
     using MyForumApp.Web.ViewModels.Home;
 
+    [Authorize]
     public class HomeController : BaseController
     {
         private readonly ICategoriesService categoriesService;
@@ -16,6 +18,7 @@
             this.categoriesService = categoriesService;
         }
 
+        [AllowAnonymous]
         public IActionResult Index()
         {
             var viewModel = new IndexViewModel
@@ -26,6 +29,7 @@
             return this.View(viewModel);
         }
 
+        [AllowAnonymous]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

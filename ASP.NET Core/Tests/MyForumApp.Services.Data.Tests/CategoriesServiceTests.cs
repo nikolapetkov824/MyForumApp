@@ -38,6 +38,21 @@
         }
 
         [Fact]
+        public void GetByNameShouldReturnException()
+        {
+            var repository = new Mock<IDeletableEntityRepository<Category>>();
+            repository.Setup(r => r.All()).Returns(new List<Category>
+                                                        {
+                                                            new Category() { Id = 1 },
+                                                            new Category() { Id = 2 },
+                                                            new Category() { Id = 3 },
+                                                        }.AsQueryable());
+            var service = new CategoriesService(repository.Object);
+            Assert.Throws<NullReferenceException>(() => service.GetByNameNonGeneric("a").Name);
+            repository.Verify(x => x.All(), Times.Once);
+        }
+
+        [Fact]
         public async Task GetAllShouldReturnAllCategoriesUsingDbContext()
         {
             var configuration = new MapperConfiguration(cfg =>
@@ -57,6 +72,22 @@
             var categories = categoriesService.GetAll(3);
             Assert.Equal(3, categories.Count());
         }
+
+
+        /// <summary>
+        /// This test for exception returns Failure() instead of the exception.
+        /// </summary>
+        //[Fact]
+        //public void GetAllShouldReturnException()
+        //{
+        //    var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+        //        .UseInMemoryDatabase(Guid.NewGuid().ToString());
+        //    var repository = new EfDeletableEntityRepository<Category>(new ApplicationDbContext(options.Options));
+        //    repository.SaveChangesAsync().GetAwaiter().GetResult();
+        //    var categoriesService = new CategoriesService(repository);
+        //    AutoMapperConfig.RegisterMappings(typeof(MyTestCategory).Assembly);
+        //    Assert.Throws<NullReferenceException>(() => categoriesService.GetAll(3));
+        //}
 
         public class MyTestCategory : IMapFrom<Category>, IMapTo<Category>
         {
