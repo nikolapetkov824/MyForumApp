@@ -46,7 +46,11 @@
                     </div>
                     <div class="card-body">
                         <article>
+<<<<<<< HEAD
                             <a asp-controller="Posts" asp-action="Details" asp-route-postId="@post.Id" asp-route-categoryId="@Model.Id">Details</a>
+=======
+                            <a asp-controller="PostDetails" asp-action="Details" asp-route-postId="@post.Id" asp-route-categoryId="@Model.Id">Details</a>
+>>>>>>> fbbf98268666afe7fbda3e0a94452d8d0dffcdd8
                             <input asp-for="@Model.Title" type="hidden" class="text-danger" />
                             <input asp-for="@Model.Id" type="hidden" class="text-danger" />
                         </article>

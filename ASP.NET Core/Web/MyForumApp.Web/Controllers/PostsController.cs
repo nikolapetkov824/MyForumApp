@@ -8,7 +8,10 @@
     using MyForumApp.Data.Models;
     using MyForumApp.Services.Data;
     using MyForumApp.Web.ViewModels;
+<<<<<<< HEAD
     using MyForumApp.Web.ViewModels.Categories;
+=======
+>>>>>>> fbbf98268666afe7fbda3e0a94452d8d0dffcdd8
     using MyForumApp.Web.ViewModels.Posts;
 
     [Authorize]
@@ -110,6 +113,7 @@
 
             return this.RedirectToAction(nameof(this.ById), new { id = postId });
         }
+<<<<<<< HEAD
 
         [AllowAnonymous]
         public IActionResult Details(int postId, int categoryId)
@@ -130,5 +134,7 @@
 
             return this.View(post);
         }
+=======
+>>>>>>> fbbf98268666afe7fbda3e0a94452d8d0dffcdd8
     }
 }
