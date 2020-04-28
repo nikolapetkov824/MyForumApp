@@ -1,11 +1,10 @@
 ﻿namespace MyForumApp.Web.ViewModels.Comments
 {
     using System;
-    using System.Collections.Generic;
+
     using Ganss.XSS;
     using MyForumApp.Data.Models;
     using MyForumApp.Services.Mapping;
-    using MyForumApp.Web.ViewModels.Replies;
 
     public class IndexCommentViewModel : IMapFrom<Comment>
     {
@@ -22,6 +21,8 @@
         public string UserId { get; set; }
 
         public string UserUserName { get; set; }
+
+        public string UserImageUrl { get; set; }
 
         public DateTime CreatedOn { get; set; }
     }

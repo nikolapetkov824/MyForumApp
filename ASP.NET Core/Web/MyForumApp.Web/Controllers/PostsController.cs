@@ -7,8 +7,11 @@
     using Microsoft.AspNetCore.Mvc;
     using MyForumApp.Data.Models;
     using MyForumApp.Services.Data;
+    using MyForumApp.Web.ViewModels;
+    using MyForumApp.Web.ViewModels.Categories;
     using MyForumApp.Web.ViewModels.Posts;
 
+    [Authorize]
     public class PostsController : Controller
     {
         private readonly IPostsService postsService;
@@ -25,6 +28,7 @@
             this.userManager = userManager;
         }
 
+        [AllowAnonymous]
         public IActionResult ById(int id)
         {
             var postViewModel = this.postsService.GetById<PostViewModel>(id);
@@ -37,11 +41,11 @@
         }
 
         [Authorize]
-        public IActionResult CreatePost()
+        public IActionResult CreatePost(ErrorViewModel error)
         {
             if (!this.ModelState.IsValid)
             {
-                return this.View("Error");
+                return this.View(error);
             }
 
             var categories = this.categoriesService.GetAll<CategoryDropDownViewModel>();
@@ -71,6 +75,60 @@
                 user.Id);
 
             return this.RedirectToAction(nameof(this.ById), new { id = postId });
+        }
+
+        [HttpGet]
+        [Authorize]
+        public IActionResult EditPost(int id)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View("Error");
+            }
+
+            var viewModel = this.postsService.GetById<PostViewModel>(id);
+
+            //InvalidOperationException: Can't figure out why I can't see the View
+
+            return this.View(viewModel);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> EditPost(PostViewModel model)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+
+            //InvalidOperationException: Missing map from Post to Post ???
+
+            var user = await this.userManager.GetUserAsync(this.User);
+
+            var postId = await this.postsService.EditPostContent(model.Id, model.Description);
+
+            return this.RedirectToAction(nameof(this.ById), new { id = postId });
+        }
+
+        [AllowAnonymous]
+        public IActionResult Details(int postId, int categoryId)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View("Error");
+            }
+
+            var post = this.postsService.GetById<PostDetailsViewModel>(postId);
+
+            if (post == null)
+            {
+                return this.NotFound();
+            }
+
+            post.ForumPosts = this.postsService.GetByCategoryIdWithoutSkip<PostInCategoryViewModel>(categoryId);
+
+            return this.View(post);
         }
     }
 }

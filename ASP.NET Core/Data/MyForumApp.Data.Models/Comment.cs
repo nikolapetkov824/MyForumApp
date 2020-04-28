@@ -1,9 +1,12 @@
 ﻿namespace MyForumApp.Data.Models
 {
+    using System.ComponentModel.DataAnnotations;
+
     using MyForumApp.Data.Common.Models;
 
     public class Comment : BaseDeletableModel<int>
     {
+        [Range(1, int.MaxValue)]
         public int PostId { get; set; }
 
         public virtual Post Post { get; set; }

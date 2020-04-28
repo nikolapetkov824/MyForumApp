@@ -18,13 +18,15 @@
 
             var categories = new List<(string Name, string ImageUrl)>
             {
-                ("Sport", "https://tini.to/v8v"),
-                ("Coronavirus", "https://tini.to/lTU"),
-                ("News", "https://tini.to/rAWT"),
-                ("Music", "https://tini.to/Qou"),
-                ("Programming", "https://tini.to/ia7"),
-                ("Cats", "https://tini.to/fnA"),
-                ("Dogs", "https://tini.to/n0g"),
+                ("Sport", "https://tinyurl.com/y6vnfzhf"),
+                ("Coronavirus", "https://tinyurl.com/ycbgyoch"),
+                ("News", "https://tinyurl.com/yx47x3no"),
+                ("Music", "https://tinyurl.com/yb5pzhmr"),
+                ("Programming", "https://tinyurl.com/y785qopu"),
+                ("Cats", "https://tinyurl.com/rjvll5q"),
+                ("Dogs", "https://tinyurl.com/sgxels3"),
+                ("Video Games", "https://tinyurl.com/y9spk64y"),
+                ("Cars", "https://tinyurl.com/y7lugo6l"),
             };
             foreach (var category in categories)
             {

@@ -1,0 +1,27 @@
+﻿@using MyForumApp.Common
+@using MyForumApp.Data.Models
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@model MyForumApp.Web.ViewModels.Posts.PostViewModel
+
+<script src="/lib/tinymce/tinymce.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+    tinymce.init({
+        selector: "textarea",
+        plugins: ["image paste table link code media"]
+    });
+</script>
+<div>
+    <form asp-controller="Comments" asp-action="CreateComment" method="post" id="AddCommentForm" style="display: none">
+        <input type="hidden" name="PostId" value="@this.Model.Id" />
+        <input type="hidden" name="CommentParentId" value="0" />
+        <div>
+            <label for="Content"></label>
+            <textarea name="Content" id="Content" class="form-control"></textarea>
+        </div>
+        <div>
+            <input type="submit" class="btn btn-primary" value="Add comment" />
+        </div>
+    </form>
+</div>

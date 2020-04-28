@@ -10,6 +10,7 @@
     using MyForumApp.Services.Data;
     using MyForumApp.Web.ViewModels.Comments;
 
+    [Authorize]
     public class CommentsController : Controller
     {
         private readonly ICommentsService commentsService;
@@ -23,8 +24,14 @@
             this.userManager = userManager;
         }
 
+        [AllowAnonymous]
         public IActionResult GetById(int postId)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.Redirect("Error");
+            }
+
             var viewModel = new CommentViewModel
             {
                 Comments = this.commentsService.GetAll<IndexCommentViewModel>()

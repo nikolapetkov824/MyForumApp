@@ -6,6 +6,7 @@
 
     public class Vote : BaseModel<int>
     {
+        [Range(1, int.MaxValue)]
         public int PostId { get; set; }
 
         public virtual Post Post { get; set; }
